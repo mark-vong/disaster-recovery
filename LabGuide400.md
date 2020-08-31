@@ -6,18 +6,18 @@
 
 ## Introduction
 
-Welcome to an introduction of rsync. Rsync is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its delta-transfer algorithm that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. Rsync is used extensively in backups, disaster recovery, and mirroring scenarios. 
+Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its **delta-transfer algorithm** that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. **Rsync** is used extensively in **backups**, **disaster recovery**, and **mirroring** scenarios. 
 
-For this lab specifically, we will be working in the terminal exclusively. As a result, we've included the commands to run as we walk you through the lab steps. 
+**For this lab specifically, we will be working in the terminal exclusively. As a result, we've included the commands to run as we walk you through the lab steps.** 
 
-In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync. 
+**In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync.** 
 
-In the second and final part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.
+**In the second and final part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.**
 
-*This lab will leverage the existing infrastructure that was created previously from the terraform script.* 
+**This lab will leverage the existing infrastructure that was created previously from the terraform script.** 
 
 ### Objectives
-- Understand the syntax of rsync.
+- Understand the syntax of **rsync**.
 - Sync files locally.
 - Sync files between a local host and a remote server.
 
