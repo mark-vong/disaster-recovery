@@ -8,6 +8,12 @@
 
 Welcome to an introduction of rsync. Rsync is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its delta-transfer algorithm that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. Rsync is used extensively in backups, disaster recovery, and mirroring scenarios. 
 
+For this lab specifically, we will be working in the terminal exclusively. As a result, we've included the commands to run as we walk you through the lab steps. 
+
+In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync. 
+
+In the second and final part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.
+
 *This lab will leverage the existing infrastructure that was created previously from the terraform script.* 
 
 ### Objectives
@@ -19,11 +25,53 @@ Welcome to an introduction of rsync. Rsync is a file copying tool that exists on
 -   To learn more about rsync, please refer to the following Linux documentation: [rsync](https://linux.die.net/man/1/rsync)
 -   To learn more about specific rsync use cases, please refer to the following tutorial [rsync usage](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps).
 
-## Part 1. The Disaster
+## Part 1. Syncing files between two folders on the same machine.
 
-### Drain connections from Primary Region Load Balancer
+### Step 1. Create two folders. Name one "primary_sync" and the other "standby_sync".
 
-![](./screenshots/300screenshots/1.png)
+```
+$ mkdir primary_sync standby_sync
+
+$ ls 
+```
+
+### Step 2. Create a file in "primary_sync" and name it "primary.txt".
+
+```
+$ touch primary_sync/primary.txt
+
+$ ls primary_sync 
+```
+
+### Step 3. Verify that only "primary_sync" has a file in it and "standby_sync" is empty.
+
+```
+$ ls primary_sync/ standby_sync/
+```
+
+### Before we use rsync to sync the file between the folders, a little about the option flags we'll be using:
+#### -a represents "archive". It allows us to sync all files in the source directory recursively while preserving any symbolic links, special and device files, modification times, group, owner, and permission.
+#### -v represents "verbose". This flag lets us know what's happening when the command is run.
+#### -P represents the combination of the "progress" and "partial" flags which allow us to see the transfer progress bar as well as the resumption of interrupted transfers.
+#### -n represented "dry-run". This flag shows what content would have been transferred, useful to test out connectivity to the target host as well as target folder access. 
+
+### Step 4. Great, now let's execute our first sync between the two folders. Let's include the "-n" flag first to make sure everything is in place before we actually sync the file.
+
+```
+$ rsync -avP primary_sync/ standby_sync -n
+
+$ ls primary_sync/ standby_sync/
+```
+
+### Step 5. Removing the "-n" flag will sync the file over to the "standby_sync" folder.
+```
+$ rsync -avP primary_sync/ standby_sync 
+ 
+$ ls primary_sync/ standby_sync/
+```
+### Nice work! You've successfully used rsync to sync a file between two local folders.
+
+
 
 Navigate from the upper left hamburger menu to networking -> Load balancers. Find the Load Balancer in your primary region.
 
