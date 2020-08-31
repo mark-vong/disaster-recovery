@@ -23,7 +23,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ### Extra Resources
 -   To learn more about rsync, please refer to the following Linux documentation: [rsync](https://linux.die.net/man/1/rsync)
--   To learn more about specific rsync use cases, please refer to the following tutorial [rsync usage](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps).
+-   To learn more about specific rsync use cases, please refer to the following tutorial: [rsync usage](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps).
 
 ## Part 1. Syncing files between two folders on the same local machine.
 
@@ -71,6 +71,9 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 ```
 ### Nice work! You've successfully used rsync to sync a file between two local folders.
 
+
+
+
 ## Part 2. Syncing files between a local host and a remote server.
 
 ### **Step 1:** Add the public key to your bastion server to your machine's key chain (authentication agent).
@@ -103,17 +106,51 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 ```
 opc@<remote_server>$ ls 
 ```
+
 ### **Step 6:** We will now do a dry-run sync of the folder and its file from our local machine to the remote server. The syntax will differ a bit from Part 1 as we are leveraging a new option flag:
 #### "-e" allows us to execute shell commands. We'll leverage this to hop into the remote server from the bastion server.
 ```
 <local_machine>$ rsync -avP "ssh -A -J opc@<bastion_public_ip>" app_files opc@<app_server_private_ip>:/home/opc/ -n
 ```
+
 ### **Step 7:** After testing the sync with the "-n" flag, remove it and re-run the command. You should now see that the "app_files" folder and its contents are synced to the remote server. Navigate to the remote server terminal and verify.
 ```
 opc@<remote_server>$ ls
 ```
 
 ### Congratulations, you successfully simulated the synchronization of files between a local machine and a remote server!
+
+
+
+## (Optional) Part 3. Setting up periodic and automated syncs using Cron.
+### Cron is a Linux tool that enables periodic repitition of commands.  
+
+### **Step 1:** Run the following command to open a text editor. This editor will contain all of the **rules** for command repititions. 
+```
+<source_machine>$ crontab -e
+```
+
+### Configuring the crontab rule:
+```
+Syntax: 'm h dom mon dow command'
+m: minutes (0-59)
+h: hours (0-23)
+dom: day of the month (1-31)
+mon: month (1-12)
+dow: day of the week (0:sunday - 6:saturday)
+command: command to execute
+```
+#### Example for automated sync job for every month, every day, every hour at 30 minutes:
+```
+30 * * * * rsync -avP source_folder <user>@<remote_server_ip>:target_folder
+```
+ 
+### **Step 2:** Save the file and close the editor. Then verify that the crontab saved.
+```
+<source_machine>$ crontab -l
+```
+### Great, the sync will now automate for the proposed period of time!
+
 
 ## Summary
 
