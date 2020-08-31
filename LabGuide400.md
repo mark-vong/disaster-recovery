@@ -110,14 +110,14 @@ opc@<remote_server>$ ls
 ```
 ### **Step 7:** After testing the sync with the "-n" flag, remove it and re-run the command. You should now see that the "app_files" folder and its contents are synced to the remote server. Navigate to the remote server terminal and verify.
 ```
-<opc@<remote_server>$ ls
+opc@<remote_server>$ ls
 ```
 
 ### Congratulations, you successfully simulated the synchronization of files between a local machine and a remote server!
 
 ## Summary
 
--   In this lab, you learned how to simulate a disaster event, and redirect traffic to your standby region.
+-   In this lab, you learned how to use rsync to sync files on a local machine as well as from a local machine to a remote server.
 
 -   **You are ready to move on to the next lab!**
 
