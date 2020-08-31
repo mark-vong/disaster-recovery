@@ -29,7 +29,7 @@ In the second and final part of the lab, we will simulate how an administrator w
 
 ### **Step 1:** Create two folders. Name one "primary_sync" and the other "standby_sync".
 
-```bash
+```
 <local_machine>$ mkdir primary_sync standby_sync
 
 <local_machine>$ ls 
