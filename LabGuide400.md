@@ -123,9 +123,9 @@ opc@<remote_server>$ ls
 
 
 ## (Optional) Part 3. Setting up periodic and automated syncs using Cron.
-### Cron is a Linux tool that enables periodic repitition of commands.  
+### Cron is a Linux tool that enables periodic repetition of commands.  
 
-### **Step 1:** Run the following command to open a text editor. This editor will contain all of the **rules** for command repititions. 
+### **Step 1:** Run the following command to open a text editor. This editor will contain all of the **rules** for command repetitions. 
 ```
 <source_machine>$ crontab -e
 ```
