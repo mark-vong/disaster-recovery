@@ -1,12 +1,15 @@
-# Disaster Recovery
+# Disaster Recovery Network and connectivity setup
 
-![](./screenshots/200screenshots/intro.png)
-
-Disaster Recovery Network and connectivity setup
-=======================================================
+## Introduction
 
 This solution provides a Network Architecture deployment to demonstrate Disaster Recovery scenario across 2 regions [examples are geared towards region Ashburn & Phoenix, but any region in OCI can be used].
 
+### Objectives
+- Deploy DR network and infrastructure on OCI using Terraform.
+- Configure network and infrastructure settings through the Oracle Cloud console.
+
+### Extra Resources
+- [Introduction to OCI](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
 
 ## Quickstart Deployment
 
@@ -55,55 +58,55 @@ This solution provides a Network Architecture deployment to demonstrate Disaster
 *Sample terraform.tfvars file to create Hyperion infrastructure in single availability domain architecture*
 
 ```
-# DR region for standby (us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1)
+DR region for standby (us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1)
 dr_region = "us-phoenix-1"
 
-# CIDR block of Standby VCN to be created
+CIDR block of Standby VCN to be created
 dr_vcn_cidr_block = "10.0.0.0/16"
 
-# CIDR block of Primary VCN to be created
+CIDR block of Primary VCN to be created
 vcn_cidr_block = "192.168.0.0/16"
 
-# DNS label of VCN to be created
+DNS label of VCN to be created
 vcn_dns_label = "drvcn"
 
-# Object Storage bucker name (will be prefixed by region name)
+Object Storage bucker name (will be prefixed by region name)
 bucket_display_name = "bucket-dr"
 
-# Compute shape for bastion server
+Compute shape for bastion server
 bastion_server_shape = "VM.Standard2.1"
 
-# Compute shape for application servers
+Compute shape for application servers
 app_server_shape = "VM.Standard2.2"
 
-# Database display name
+Database display name
 db_display_name = "ActiveDBSystem"
 
-# Compute shape for Database server
+Compute shape for Database server
 db_system_shape = "VM.Standard2.2"
 
-# DB admin password for database
+DB admin password for database
 db_admin_password = "AAbb__111"
 
-# shape for Load Balancer
+shape for Load Balancer
 lb_shape = "100Mbps"
 
-# Cron schedule for Primary region [this runs every 12 hours]
+Cron schedule for Primary region [this runs every 12 hours]
 cron_schedule = "0 */12 * * *"
 
-# Cron schedule for Standby region, this is intentionally commented out as the replication job should run only on servers in primary regio [runs every 12 hours]
+Cron schedule for Standby region, this is intentionally commented out as the replication job should run only on servers in primary regio [runs every 12 hours]
 dr_cron_schedule = "#0 */12 * * *"
 
-# path to public ssh key to set as the authorized key on the bastion host
+path to public ssh key to set as the authorized key on the bastion host
 bastion_ssh_public_key_file  = "~/.ssh/id_rsa.pub"
 
-# path to private ssh key to access the bastion host
+path to private ssh key to access the bastion host
 bastion_ssh_private_key_file = "~/.ssh/id_rsa"
 
-# path to public ssh key to set as the authorized key for all app instances 
+path to public ssh key to set as the authorized key for all app instances 
 remote_ssh_public_key_file   = "~/.ssh/id_rsa.pub"
 
-# path to private ssh key for all app instances
+path to private ssh key for all app instances
 remote_ssh_private_key_file  = "~/.ssh/id_rsa"
 ```
 ## Example of the results terraform will produce.
@@ -139,7 +142,7 @@ remote_ssh_private_key_file  = "~/.ssh/id_rsa"
 
 ![](./screenshots/100screenshots/Failover-Policy-Publish.png)
 
-# Adding Html to the compute instances.
+<!-- # Adding Html to the compute instances.
 
 You can place these HTML files in your app-tier compute nodes to demonstrate the DR working by displaying different HTML pages depending on which region you are hitting. You can see this information in the IP address as well, but this is additional visual stimulation.
 
@@ -150,7 +153,7 @@ You can place these HTML files in your app-tier compute nodes to demonstrate the
 *Follow the instructions in the [html file](HTML-Instructions.txt)*
 
 
-## Troubleshooting
+## Troubleshooting -->
 
 
 ### End
