@@ -1,4 +1,4 @@
-# Using Rsync for application file sync
+# Using Rsync for Application File Sync
 <!-- Comment out table of contents
 ## Table of Contents
 [Introduction](#introduction)

@@ -1,4 +1,4 @@
-# Disaster Recovery Network and connectivity setup
+# Disaster Recovery Network and Connectivity Setup
 
 ## Introduction
 
