@@ -6,7 +6,7 @@
             "filename": "README.md"
         },
         {            
-            "title": "Lab 100: Setup your environment",
+            "title": "Lab 100: Disaster Recovery Network and connectivity setup",
             "publisheddate": "09/03/2020",
             "filename": "LabGuide100.md"
         },
@@ -16,12 +16,12 @@
             "filename": "LabGuide200.md"
         },
         {            
-            "title": "Lab 300: OCI Data Guard",
+            "title": "Lab 300: OCI Active Data Guard",
             "publisheddate": "09/03/2020",
             "filename": "LabGuide300.md"
         },
         {            
-            "title": "Lab 400: Manual Data Guard",
+            "title": "Lab 400: Manual Active Data Guard",
             "publisheddate": "09/03/2020",
             "filename": "LabGuide400.md"
         }
