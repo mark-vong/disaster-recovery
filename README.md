@@ -21,3 +21,5 @@ In this workshop, we'll take an in-depth look into the disaster recovery (DR) so
 ### [Lab 200: Leverage Rsync for application file sync](LabGuide200.md)
 
 ### [Lab 300: OCI Data Guard](LabGuide300.md)
+
+### [Lab 400: Manual Data Guard](LabGuide400.md)

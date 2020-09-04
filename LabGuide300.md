@@ -96,7 +96,7 @@ On **BOTH** servers, enter the following commands:
 After you are connected to the database, run the following query to verify both database roles. (_Note: run on **BOTH** databases_.)
 
 ```
- > select name, database_role, open_mode from v$database;
+SQL> select name, database_role, open_mode from v$database;
 ```
 
 Primary:
@@ -110,11 +110,11 @@ Standby:
 Now we can test if Data Guard is working correctly. On the **Primary** database, we will create a table and insert some data into it. (_Note: copying and pasting from this lab may not work due to formatting. Please type the commands manually_.)
 
 ```
- > create table employees(first_name varchar2(50));
+SQL> create table employees(first_name varchar2(50));
 
- > insert into employees values ('thomas');
+SQL> insert into employees values ('thomas');
 
- > commit;
+SQL> commit;
 ```
 
 ![](./screenshots/300screenshots/3_8.png)
@@ -122,7 +122,7 @@ Now we can test if Data Guard is working correctly. On the **Primary** database,
 Now go to the **Standby** database and query the table that you just created on the primary database. (_Note: it may take a few minutes for the table to appear_.)
 
 ```
- > select * from employees;
+SQL> select * from employees;
 ```
 
 ![](./screenshots/300screenshots/3_9.png)
