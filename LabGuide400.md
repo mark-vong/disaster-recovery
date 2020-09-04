@@ -1,7 +1,7 @@
-Manual Active Oracle Data Guard
-=======================================================
+# Manual Active Oracle Data Guard
+<!-- ======================================================= -->
 
-# Table of Contents
+<!-- # Table of Contents
 * [Why Active Data Guard?](#why)
 * [Assumptions](#Assumptions)
 * [Preparing Primary (Source) database](#primary-prep)
@@ -26,10 +26,10 @@ Manual Active Oracle Data Guard
 * [Making sure data is being replicated](#data-replication)
   * [Checking if PDBs are READ ONLY](#pdb_readonly)
   * [Checking for PDB violations](#pdb_violation)
-  * [Creating a table on PRIMARY to see if it's replicated on STANDBY](#table_replication_test)
+  * [Creating a table on PRIMARY to see if it's replicated on STANDBY](#table_replication_test) -->
 
-<a name="why"></a>
-# Why Active Data Guard?
+<!-- <a name="why"></a> -->
+## Why Active Data Guard?
 Active Data Guard is when the standby database is in READ ONLY WITH APPLY.
 
 Some advantages -:
@@ -44,8 +44,8 @@ https://dbaclass.com/article/how-to-open-standby-database-when-primary-database-
 <!-- ASSUMPTIONS SECTION START -->
 <!-- ASSUMPTIONS SECTION START -->
 <!-- ASSUMPTIONS SECTION START -->
-<a name="Assumptions"></a>
-# Assumptions
+<!-- <a name="Assumptions"></a> -->
+## Assumptions
 1. **Source** is Oracle Database 12c EE High Perf Release 12.2.0.1.0 - 64bit Production.
 2. **Target** has Oracle Database 12c EE High Perf Release 12.2.0.1.0 - 64bit Production **binaries**.
 3. If using OCI, both databases have appropriate security lists that can allow communication both ways.
@@ -76,7 +76,7 @@ SQL> exit
 ```
 Otherwise, contact your DBA
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- ASSUMPTIONS SECTION END -->
 <!-- ASSUMPTIONS SECTION END -->
 <!-- ASSUMPTIONS SECTION END -->
@@ -87,8 +87,8 @@ Otherwise, contact your DBA
 <!-- SOURCE PREP SECTION START -->
 <!-- SOURCE PREP SECTION START -->
 
-<a name="primary-prep"></a>
-# Preparing Primary Source database
+<!-- <a name="primary-prep"></a> -->
+## Preparing Primary Source database
 First thing, we need to make sure our source database is in ARCHIVELOG mode.
 ```
 $ sqlplus / as sysdba
@@ -96,7 +96,7 @@ SQL> select log_mode from v$database;
 ```
 ![](./screenshots/400screenshots/src_is_arch.png)
 
-<a name="primary-params"></a>
+<!-- <a name="primary-params"></a> -->
 #### Editing source Parameters
 Next, we need to enable force logging and flashback on parameters. The parameters may already be enabled, which will give you an error -- but that's okay.
 ```
@@ -124,9 +124,9 @@ ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=AUTO;
 ```
 ![](./screenshots/400screenshots/src_change_params.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="primary-wallet-pass"></a>
+<!-- <a name="primary-wallet-pass"></a> -->
 #### Copying source wallet directory, and password files
 By default, OCI encrypts the Database. This means we have to copy both the password file, as well as the contents of the wallet directory from our Source database, and add it to our target database. I am going to copy it to a shared NFS between the two servers. There's other ways like WinSCP, or using Linux Secure Copy (scp).
 
@@ -156,9 +156,9 @@ $ cp orapw{source_sid} /ATX/NOAH/DG_WALLET/orapw{target_sid}
 ```
 ![](./screenshots/400screenshots/ora_pw_src_cp.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="primary-standby-logs"></a>
+<!-- <a name="primary-standby-logs"></a> -->
 #### Adding standby redo logs on source database
 You need to create standby redo logs on your source for maximum protection. Without creating standby logs, the standby will apply archived logs once they are created by RFS. Since standby cannot apply incomplete archive logs, you can see where the issue arises. [Learn more about it here](https://dbaclass.com/article/standby-redologs-oracle-dataguard/)
 
@@ -201,9 +201,9 @@ SQL> select b.thread#, a.group#, a.member, b.bytes FROM v$logfile a, v$standby_l
 ```
 ![](./screenshots/400screenshots/src_redo_add_success.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="primary-pfile"></a>
+<!-- <a name="primary-pfile"></a> -->
 #### Grabbing source parameters for our target (standby) pfile
 Last thing, we need to create a pfile from spfile on source (PRIMARY) and grab some of the parameters for our target (STANDBY) pfile.
 
@@ -235,7 +235,7 @@ $ grep -E '(\*\.compatible.*)|(\*\.open_cursors.*)|(\*\.pga_aggregate_target.*)|
 
 ***NOW SAVE THESE FOR STEP Creating our STANDBY pfile***
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- SOURCE PREP SECTION END -->
 <!-- SOURCE PREP SECTION END -->
 <!-- SOURCE PREP SECTION END -->
@@ -246,11 +246,11 @@ $ grep -E '(\*\.compatible.*)|(\*\.open_cursors.*)|(\*\.pga_aggregate_target.*)|
 <!-- TARGET PREP SECTION START -->
 <!-- TARGET PREP SECTION START -->
 <!-- TARGET PREP SECTION START -->
-<a name="target-prep"></a>
-# Preparing Standby Target database
+<!-- <a name="target-prep"></a> -->
+## Preparing Standby Target database
 
 
-<a name="standby-copy-wallpass"></a>
+<!-- <a name="standby-copy-wallpass"></a> -->
 #### Copying wallet and password file to standby
 This is pretty straight forward, just copy the files from your NFS, Desktop, or /tmp/ folder into their correct places.
 
@@ -292,9 +292,9 @@ $ ls -ltr *orapw*
 
 ![](./screenshots/400screenshots/trgt_orapwcpy.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="standby-audit"></a>
+<!-- <a name="standby-audit"></a> -->
 #### Creating an audit directory
 You need an audit directory, OCI creates one already for our database but you can create and directory and specify it in the pfile we're going to make below. Just note down the directory, in our case I'm going to use /u01/app/oracle/admin/NOAHDR_iad38f/adump. Since I already have it, I'll just show a screenshot of running ls on it.
 ```
@@ -304,9 +304,9 @@ $ mkdir -m 777 $ORACLE_BASE/admin/target_unqname/adump
 
 ***NOTE THE DIRECTORY DOWN YOU MADE, FOR FILLING IN THE STANDBY PFILE BELOW***
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="standby-domain"></a>
+<!-- <a name="standby-domain"></a> -->
 #### Grabbing the DB domain
 Now, the last parameter we need to grab is the db_domain. If you're on OCI, and the two databases are in the same subnet you can just use the db_domain parameter on the source. There are a few ways to grab it regardless, so I'll show you that.
 
@@ -332,9 +332,9 @@ Same concept as above.
 
 ***NOTE THE DOMAIN NAME, FOR FILLING IN THE STANDBY PFILE BELOW***
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="standby-asm"></a>
+<!-- <a name="standby-asm"></a> -->
 #### Grabbing ASM directory names
 Default OCI is just +DATA and +RECO, but I've seen DBAs who have +RECO4, +RECOC, etc... A quick and fast way to check is to just do this. **If for some reason this command doesn't work as Oracle user, change to Grid user.**
 ```
@@ -346,9 +346,9 @@ In our case, our ASM data directory is '+DATA', and our ASM reco directory is "+
 
 ***NOTE THE DATA / RECO LOCATION FOR FILLING IN THE STANDBY PFILE BELOW***
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="pfile_create"></a>
+<!-- <a name="pfile_create"></a> -->
 #### Creating our STANDBY pfile
 We need to create a pfile that we can use to startup our empty target (standby) database. Make sure your are doing this on the ***TARGET (STANDBY)*** database. These are the steps -:
 ```
@@ -395,9 +395,9 @@ Now, edit the below to fit your parameters and then paste it into the init{targe
 Don't forget to save and exit VI (:x or :wq), and make sure there are no extra lines or missing apostrophes!
 ![](./screenshots/400screenshots/trgt_initfile.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="pfile_test"></a>
+<!-- <a name="pfile_test"></a> -->
 #### Testing pfile, and creating spfile
 This is where it can get annoying, but Oracle's error handling is pretty good. We're going to use the pfile we just created to startup the database in nomount. We are then going to create an spfile into our ASM data directory from the pfile.
 
@@ -432,7 +432,7 @@ $ vi init{target_sid}.ora
 ```
 ![](./screenshots/400screenshots/spfile_in_pfile.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- TARGET PREP SECTION END -->
 <!-- TARGET PREP SECTION END -->
 <!-- TARGET PREP SECTION END -->
@@ -443,8 +443,8 @@ $ vi init{target_sid}.ora
 <!-- CONNECTIVITY SECTION START -->
 <!-- CONNECTIVITY SECTION START -->
 
-<a name="conn-setup"></a>
-# Setting up connectivity between source and target
+<!-- <a name="conn-setup"></a> -->
+## Setting up connectivity between source and target
 In order to allow cross connection between our two databases, we're going to have to add entries to both tnsnames.ora in $ORACLE_HOME/network/admin. Go ahead and cat the tnsnames.ora, and you can get an idea of what it looks like.
 
 SOURCE
@@ -460,9 +460,9 @@ $ cat $ORACLE_HOME/network/admin/tnsnames.ora
 ![](./screenshots/400screenshots/cat_tns_trgt.png)
 
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="db_conn"></a>
+<!-- <a name="db_conn"></a> -->
 #### How to make the two databases able to connect to each other
 Now that you have ran cat on both tnsnames.ora, you can edit each one accordingly. For example, on source you will add the target entry below, and vice versa. To do this, you can use vi. Once you edit them, it should look similar to the screenshot below.
 
@@ -478,9 +478,9 @@ TARGET
 
 ![](./screenshots/400screenshots/trgt_tns_add_src.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="test_db_conn"></a>
+<!-- <a name="test_db_conn"></a> -->
 #### Testing database connectivity
 ##### TESTING CONNECTIVITY FROM TARGET (STANDBY) TO SOURCE (PRIMARY)!!!!
 ***AKA, MAKE SURE YOU'RE RUNNING THIS ONE ON THE TARGET DATABASE***
@@ -502,7 +502,7 @@ If you can connect, configurations... you're really close! If not, it's always g
 
 [Information on OCI security lists](https://docs.cloud.oracle.com/en-us/iaas/Content/Network/Concepts/securitylists.htm)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- CONNECTIVITY SECTION END -->
 <!-- CONNECTIVITY SECTION END -->
 <!-- CONNECTIVITY SECTION END -->
@@ -512,8 +512,8 @@ If you can connect, configurations... you're really close! If not, it's always g
 <!-- DUPLICATION SECTION START -->
 <!-- DUPLICATION SECTION START -->
 <!-- DUPLICATION SECTION START -->
-<a name="rman-dupe"></a>
-# Running active duplicate from primary
+<!-- <a name="rman-dupe"></a> -->
+## Running active duplicate from primary
 #### Make sure you're on the SOURCE (PRIMARY) database!!
 You may see "target" and get confused, but just follow the syntax. Basically, you target into your current source database and then set the target as your auxiliary all in this one liner.
 ```
@@ -531,7 +531,7 @@ RMAN> duplicate target database for standby from active database nofilenamecheck
 Once you see this, it is done... You'll now need to do some more work to finish everything up
 ![](./screenshots/400screenshots/dup_done.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- DUPLICATION SECTION END -->
 <!-- DUPLICATION SECTION END -->
 <!-- DUPLICATION SECTION END -->
@@ -541,9 +541,9 @@ Once you see this, it is done... You'll now need to do some more work to finish 
 <!-- POST DUPLICATION SECTION START -->
 <!-- POST DUPLICATION SECTION START -->
 <!-- POST DUPLICATION SECTION START -->
-<a name="rman-post-dupe"></a>
-# Post active duplication steps
-<a name="rman-mrp"></a>
+<!-- <a name="rman-post-dupe"></a> -->
+## Post active duplication steps
+<!-- <a name="rman-mrp"></a> -->
 #### Starting MRP (ON THE TARGET (STANDBY) DATABASE!!!!)
 Now that the duplication is done, we have to start MRP. MRP is just a tool that applies information from the redo logs to the standby database. It basically just syncs it up, and keeps it in sync while it's running.
 
@@ -565,9 +565,9 @@ SQL> !ps -ef | grep mrp
 ```
 ![](./screenshots/400screenshots/mrp_is_on.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="rman-logs"></a>
+<!-- <a name="rman-logs"></a> -->
 #### Verifying log shipment from primary to standby
 First, go to the primary database and then we're going to do some log switches, and grab the sequence number that is writing on the primary. The standby should then be receiving and applying that sequence number.
 
@@ -598,7 +598,7 @@ $ tail -30 alert_{target_sid}.log
 ```
 ![](./screenshots/400screenshots/trgt_switch_alertlog.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- POST DUPLICATION SECTION END -->
 <!-- POST DUPLICATION SECTION END -->
 <!-- POST DUPLICATION SECTION END -->
@@ -608,10 +608,10 @@ $ tail -30 alert_{target_sid}.log
 <!-- Making sure data is replicated SECTION START -->
 <!-- Making sure data is replicated SECTION START -->
 <!-- Making sure data is replicated SECTION START -->
-<a name="data-replication"></a>
-# Making sure data is being replicated
+<!-- <a name="data-replication"></a> -->
+## Making sure data is being replicated
 
-<a name="pdb_readonly"></a>
+<!-- <a name="pdb_readonly"></a> -->
 #### Checking if PDBs are READ ONLY
 
 On our source, there is one PDB named "SRC_PDB", so let's check our standby.
@@ -625,9 +625,9 @@ SQL> sho pdbs
 
 As you can see it was replicated, this is good obviously. Notice it's in READ ONLY mode, this is because this in an Active Data Guard (which means the database is always a read only version.)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="pdb_violation"></a>
+<!-- <a name="pdb_violation"></a> -->
 ##### Checking for PDB violations (we know there are none since it's not restricted, but this is a good query to know.)
 ```
 $ sqlplus / as sysdba
@@ -642,9 +642,9 @@ SQL> select name, cause, type, message, status from pdb_plug_in_violations where
 ```
 ![](./screenshots/400screenshots/pdb_pending_violations.png)
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 
-<a name="table_replication_test"></a>
+<!-- <a name="table_replication_test"></a> -->
 ##### Creating a table on PRIMARY to see if it's replicated on STANDBY
 
 ***ON PRIMARY***
@@ -732,7 +732,7 @@ SQL > select * from DG_LAB_TEST;
 
 
 
-[Top](#Table-of-Contents)
+<!-- [Top](#Table-of-Contents) -->
 <!-- Making sure data is replicated SECTION END -->
 <!-- Making sure data is replicated SECTION END -->
 <!-- Making sure data is replicated SECTION END -->
