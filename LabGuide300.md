@@ -1,14 +1,14 @@
-# Table of Contents
+<!-- # Table of Contents
 
 [Step 1: Provisioning the Primary database](#step-1-provisioning-the-primary-database)
 
 [Step 2: Creating a Data Guard association](#step-2-creating-a-data-guard-association)
 
-[Step 3: Connecting to databases & testing Data Guard build](#step-3-connecting-to-databases--testing-data-guard-build)
-
+[Step 3: Connecting to databases & testing Data Guard build](#step-3-connecting-to-databases--testing-data-guard-build) -->
+# OCI Data Guard
 ---
 
-# Step 1: Provisioning the Primary database
+## Step 1: Provisioning the Primary database
 
 Spin up a database using Oracle Cloud Infrastructure to serve as the "Primary" database
 
@@ -46,7 +46,7 @@ Click **Create DB System** and let it provision. (_This may take up to an hour o
 
 ![](./screenshots/300screenshots/1_9.png)
 
-# Step 2: Creating a Data Guard association
+## Step 2: Creating a Data Guard association
 
 Now that our database is provisioned and available, let's click on the database system name.
 
@@ -66,7 +66,7 @@ Enter the **Data Guard Association** details. Then click **Enable Data Guard**. 
 
 ![](./screenshots/300screenshots/2_5.png)
 
-# Step 3: Connecting to databases & testing Data Guard build
+## Step 3: Connecting to databases & testing Data Guard build
 
 After the standby database has provisioned, we will need the IP address of the instance to connect to.
 
