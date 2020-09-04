@@ -94,7 +94,7 @@ First thing, we need to make sure our source database is in ARCHIVELOG mode.
 $ sqlplus / as sysdba
 SQL> select log_mode from v$database;
 ```
-![](./screenshots/NOAHscreenshots/src_is_arch.png)
+![](./screenshots/400screenshots/src_is_arch.png)
 
 <a name="primary-params"></a>
 #### Editing source Parameters
@@ -106,7 +106,7 @@ SQL> alter database flashback ON;
 SQL> select force_logging from v$database;
 SQL> select flashback_on from v$database;
 ```
-![](./screenshots/NOAHscreenshots/force_flash_src_enable.png)
+![](./screenshots/400screenshots/force_flash_src_enable.png)
 
 Now, we need to edit these source parameters. I would reccomened copying this into a notepad, and filling it out with your values. You can paste this all at once in SQL, just make sure it's line by line.
 ```
@@ -122,7 +122,7 @@ ALTER SYSTEM SET fal_client=source_unqname scope=both;
 ALTER SYSTEM SET fal_server=target_unqname scope=both;
 ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=AUTO;
 ```
-![](./screenshots/NOAHscreenshots/src_change_params.png)
+![](./screenshots/400screenshots/src_change_params.png)
 
 [Top](#Table-of-Contents)
 
@@ -139,7 +139,7 @@ SQK> col WRL_TYPE format a10
 SQL> col status format a10
 SQL> select * from v$encryption_wallet;
 ```
-![](./screenshots/NOAHscreenshots/find_src_wallet.png)
+![](./screenshots/400screenshots/find_src_wallet.png)
 
 Now, I'm going to put the wallet contents into my NFS. You can either do this, SFTP them to your desktop, or scp them to the standby database in /tmp/ for now.
 ```
@@ -147,14 +147,14 @@ $ cd /opt/oracle/dcs/commonstore/wallets/tde/source_unqname/
 $ mkdir -m 777 /ATX/NOAH/DG_WALLET
 $ cp * /ATX/NOAH/DG_WALLET
 ```
-![](./screenshots/NOAHscreenshots/wallet_saved_src.png)
+![](./screenshots/400screenshots/wallet_saved_src.png)
 
 **How to get the password file**
 ```
 $ cd $ORACLE_HOME/dbs
 $ cp orapw{source_sid} /ATX/NOAH/DG_WALLET/orapw{target_sid}
 ```
-![](./screenshots/NOAHscreenshots/ora_pw_src_cp.png)
+![](./screenshots/400screenshots/ora_pw_src_cp.png)
 
 [Top](#Table-of-Contents)
 
@@ -169,7 +169,7 @@ $ set lines 180
 $ col MEMBER for a60
 $ select b.thread#, a.group#, a.member, b.bytes FROM v$logfile a, v$log b WHERE a.group# = b.group#;
 ```
-![](./screenshots/NOAHscreenshots/src_logfiles.png)
+![](./screenshots/400screenshots/src_logfiles.png)
 
 Now, in our case our thread (node) 1 has three redo logs (group 1,2,3). Usually your database will have a lot more, with multiple threads and unique groups. Now, we need to add standby logs to the source. We're going to add all of the current log count plus one in each group. So in our case, 3+1 = 4 total standby redo logs will be added (for thread 1)
 
@@ -190,7 +190,7 @@ SQL> alter database add standby logfile thread 1 group 5 ('+DATA','+RECO') size 
 SQL> alter database add standby logfile thread 1 group 6 ('+DATA','+RECO') size 1G;
 SQL> alter database add standby logfile thread 1 group 7 ('+DATA','+RECO') size 1G;
 ```
-![](./screenshots/NOAHscreenshots/src_redo_add.png)
+![](./screenshots/400screenshots/src_redo_add.png)
 
 Check if they were added successfully (remember I multiplexed) -:
 ```
@@ -199,7 +199,7 @@ SQL> set lines 180
 SQL> col MEMBER for a60
 SQL> select b.thread#, a.group#, a.member, b.bytes FROM v$logfile a, v$standby_log b WHERE a.group# = b.group#;
 ```
-![](./screenshots/NOAHscreenshots/src_redo_add_success.png)
+![](./screenshots/400screenshots/src_redo_add_success.png)
 
 [Top](#Table-of-Contents)
 
@@ -213,7 +213,7 @@ SQL> create pfile='/tmp/grabbing.ora' from spfile;
 SQL> exit
 cat /tmp/grabbing.ora
 ```
-![](./screenshots/NOAHscreenshots/src_spfile_grabbingparams.png)
+![](./screenshots/400screenshots/src_spfile_grabbingparams.png)
 
 This is going to be a big file, but grab these parameters for later -:
 ```
@@ -231,7 +231,7 @@ A quick way to grab these parameters it to do this -:
 ```
 $ grep -E '(\*\.compatible.*)|(\*\.open_cursors.*)|(\*\.pga_aggregate_target.*)|(\*\.sga_target.*)|(\*\..*undo_tablespace.*)|(\*\.enable_pluggable_database.*)|(\*\.db_files.*)|(\*\.db_recovery_file_dest_size.*)' /tmp/grabbing.ora
 ```
-![](./screenshots/NOAHscreenshots/src_grep_params.png)
+![](./screenshots/400screenshots/src_grep_params.png)
 
 ***NOW SAVE THESE FOR STEP Creating our STANDBY pfile***
 
@@ -260,7 +260,7 @@ First, grab the location of your target wallet
 ```
 $ sed '/ORACLE_UNQNAME/{s/\(.*ORACLE_UNQNAME\).*/\1/;q}' $ORACLE_HOME/network/admin/sqlnet.ora | sed 's/.*=//'
 ```
-![](./screenshots/NOAHscreenshots/sed_wallet.png)
+![](./screenshots/400screenshots/sed_wallet.png)
 
 Now, we're going to go to that directory and backup everything so it's empty.
 ```
@@ -272,14 +272,14 @@ $ ls -ltr | wc -l
 ```
 The final wc -l should just be 1
 
-![](./screenshots/NOAHscreenshots/wallet_clearing.png)
+![](./screenshots/400screenshots/wallet_clearing.png)
 
 Now, we're going to copy the ***WALLET*** files from our NFS. If you used SFTP then copy from desktop. If you used SCP copy from the /tmp/ directory.
 ```
 $ cd /opt/oracle/dcs/commonstore/wallets/tde/$ORACLE_UNQNAME
 $ cp /ATX/NOAH/DG_WALLET/orapw{target_sid} .
 ```
-![](./screenshots/NOAHscreenshots/nfs_wallet_copy.png)
+![](./screenshots/400screenshots/nfs_wallet_copy.png)
 
 **Password file**
 
@@ -290,7 +290,7 @@ $ cp /ATX/NOAH/DG_WALLET/
 $ ls -ltr *orapw*
 ```
 
-![](./screenshots/NOAHscreenshots/trgt_orapwcpy.png)
+![](./screenshots/400screenshots/trgt_orapwcpy.png)
 
 [Top](#Table-of-Contents)
 
@@ -300,7 +300,7 @@ You need an audit directory, OCI creates one already for our database but you ca
 ```
 $ mkdir -m 777 $ORACLE_BASE/admin/target_unqname/adump
 ```
-![](./screenshots/NOAHscreenshots/audit_ls.png)
+![](./screenshots/400screenshots/audit_ls.png)
 
 ***NOTE THE DIRECTORY DOWN YOU MADE, FOR FILLING IN THE STANDBY PFILE BELOW***
 
@@ -315,7 +315,7 @@ Now, the last parameter we need to grab is the db_domain. If you're on OCI, and 
 $ cat $ORACLE_HOME/network/admin/tnsnames.ora
 ```
 Now, once you ran the cat you want to take ***THE CURRENT TARGET DATABASE ENTRY*** Look at the screenshot below for what I mean.
-![](./screenshots/NOAHscreenshots/find_db_domain_linux.png)
+![](./screenshots/400screenshots/find_db_domain_linux.png)
 
 So, our domain name is noahdbssubnet.iris.oraclevcn.com based off of this.
 
@@ -323,12 +323,12 @@ So, our domain name is noahdbssubnet.iris.oraclevcn.com based off of this.
 ```
 $ hostname -A
 ```
-![](./screenshots/NOAHscreenshots/linux_hostname_A.png)
+![](./screenshots/400screenshots/linux_hostname_A.png)
 
 Same concept as above.
 
 **If on OCI, you can check on the instance details page**
-![](./screenshots/NOAHscreenshots/domain_OCI.png)
+![](./screenshots/400screenshots/domain_OCI.png)
 
 ***NOTE THE DOMAIN NAME, FOR FILLING IN THE STANDBY PFILE BELOW***
 
@@ -340,7 +340,7 @@ Default OCI is just +DATA and +RECO, but I've seen DBAs who have +RECO4, +RECOC,
 ```
 $ asmcmd ls -l
 ```
-![](./screenshots/NOAHscreenshots/trgt_asm.png)
+![](./screenshots/400screenshots/trgt_asm.png)
 
 In our case, our ASM data directory is '+DATA', and our ASM reco directory is "+RECO".
 
@@ -393,7 +393,7 @@ Now, edit the below to fit your parameters and then paste it into the init{targe
 ```
 
 Don't forget to save and exit VI (:x or :wq), and make sure there are no extra lines or missing apostrophes!
-![](./screenshots/NOAHscreenshots/trgt_initfile.png)
+![](./screenshots/400screenshots/trgt_initfile.png)
 
 [Top](#Table-of-Contents)
 
@@ -406,7 +406,7 @@ To startup the database with our pfile -:
 $ sqlplus / as sysdba
 SQL> startup nomount pfile='$ORACLE_HOME/dbs/init{target_sid}.ora';
 ```
-![](./screenshots/NOAHscreenshots/pfile_startup.png)
+![](./screenshots/400screenshots/pfile_startup.png)
 
 Now, create a spfile from this pfile. We do this so everytime we start up the database, it's going to use the spfile. That's why we "test" the pfile first before converting it, to make sure it'll work.
 ```
@@ -414,7 +414,7 @@ SQL> create spfile='+{asm_data}/{target_unqname}/spfile{target_sid}.ora' from pf
 SQL> startup nomount force;
 SQL> show parameter spfile;
 ```
-![](./screenshots/NOAHscreenshots/spfile_created.png)
+![](./screenshots/400screenshots/spfile_created.png)
 
 Now, we know that it works. Take the result from "show parameter spfile" and copy it for our next step. We're now going to edit the pfile we originally made, and remove everything. All we're going to have in the pfile is a reference to the "show parameter spfile". We're also going to backup the pfile we made, just incase we need to use it later for troubleshooting.
 
@@ -423,14 +423,14 @@ Backup our pfile we made -:
 $ cd $ORACLE_HOME/dbs
 $ mv init{target_sid}.ora RECOVERY_init{target_sid}.ora
 ```
-![](./screenshots/NOAHscreenshots/init_RECO_mv.png)
+![](./screenshots/400screenshots/init_RECO_mv.png)
 
 Now, created a pfile named init{target_sid}.ora, and add the one line, screenshot below.
 ```
 $ vi init{target_sid}.ora
 (add your show parameter spfile)
 ```
-![](./screenshots/NOAHscreenshots/spfile_in_pfile.png)
+![](./screenshots/400screenshots/spfile_in_pfile.png)
 
 [Top](#Table-of-Contents)
 <!-- TARGET PREP SECTION END -->
@@ -451,13 +451,13 @@ SOURCE
 ```
 $ cat $ORACLE_HOME/network/admin/tnsnames.ora
 ```
-![](./screenshots/NOAHscreenshots/cat_tns_src.png)
+![](./screenshots/400screenshots/cat_tns_src.png)
 
 TARGET
 ```
 $ cat $ORACLE_HOME/network/admin/tnsnames.ora
 ```
-![](./screenshots/NOAHscreenshots/cat_tns_trgt.png)
+![](./screenshots/400screenshots/cat_tns_trgt.png)
 
 
 [Top](#Table-of-Contents)
@@ -472,11 +472,11 @@ $ vi $ORACLE_HOME/network/admin/tnsnames.ora
 ```
 SOURCE
 
-![](./screenshots/NOAHscreenshots/src_tns_add_trgt.png)
+![](./screenshots/400screenshots/src_tns_add_trgt.png)
 
 TARGET
 
-![](./screenshots/NOAHscreenshots/trgt_tns_add_src.png)
+![](./screenshots/400screenshots/trgt_tns_add_src.png)
 
 [Top](#Table-of-Contents)
 
@@ -487,14 +487,14 @@ TARGET
 ```
 sqlplus sys/[password]@[source_unqname] as sysdba
 ```
-![](./screenshots/NOAHscreenshots/trgt_2_src.png)
+![](./screenshots/400screenshots/trgt_2_src.png)
 
 ##### TESTING CONNECTIVITY FROM SOURCE (PRIMARY) TO TARGET (STANDBY)!!!!
 ***AKA, MAKE SURE YOU'RE RUNNING THIS ONE ON THE SOURCE DATABASE***
 ```
 sqlplus sys/[password]@[target_unqname] as sysdba
 ```
-![](./screenshots/NOAHscreenshots/src_2_trgt.png)
+![](./screenshots/400screenshots/src_2_trgt.png)
 
 If you can connect, configurations... you're really close! If not, it's always going to be something with networking, which means it can be your listener or OCI security lists.
 
@@ -519,17 +519,17 @@ You may see "target" and get confused, but just follow the syntax. Basically, yo
 ```
 $ rman target sys/[password]@[source_unqname] auxiliary sys/[password]@[target_unqname]
 ```
-![](./screenshots/NOAHscreenshots/rman_target_aux.png)
+![](./screenshots/400screenshots/rman_target_aux.png)
 
 Now, just run this command and it'll duplicate to the standby. If it fails, Oracle has pretty good error handling and will give you specifics. This will take some time depending on your database size, in a lab environment it will run rather quick since you don't have much data. If this is a big database though, I would recommend making a .sh script with the rman connect string, and a run code block with the command below. Then nohup ./ the script, then tail the nohup. This makes it run in the background.
 ```
 RMAN> duplicate target database for standby from active database nofilenamecheck;
 ```
-![](./screenshots/NOAHscreenshots/dup_kickoff.png)
-![](./screenshots/NOAHscreenshots/dup_progress.png)
+![](./screenshots/400screenshots/dup_kickoff.png)
+![](./screenshots/400screenshots/dup_progress.png)
 
 Once you see this, it is done... You'll now need to do some more work to finish everything up
-![](./screenshots/NOAHscreenshots/dup_done.png)
+![](./screenshots/400screenshots/dup_done.png)
 
 [Top](#Table-of-Contents)
 <!-- DUPLICATION SECTION END -->
@@ -552,7 +552,7 @@ Check the status of the **standby** it should be mounted, and have a role of Phy
 $ sqlplus / as sysdba
 SQL> select name, open_mode, database_role, INSTANCE_NAME from v$database,v$instance;
 ```
-![](./screenshots/NOAHscreenshots/mount_ps.png)
+![](./screenshots/400screenshots/mount_ps.png)
 
 Now we're going to open it up, and start MRP. You can also run the prep command in order to see if MRP is running or not, to periodically check and confirm.
 ```
@@ -563,7 +563,7 @@ SQL> alter database recover managed standby database disconnect from session;
 SQL> select name, open_mode, database_role, INSTANCE_NAME from v$database,v$instance;
 SQL> !ps -ef | grep mrp
 ```
-![](./screenshots/NOAHscreenshots/mrp_is_on.png)
+![](./screenshots/400screenshots/mrp_is_on.png)
 
 [Top](#Table-of-Contents)
 
@@ -580,7 +580,7 @@ SQL> alter system switch logfile;
 SQL> set lines 200
 SQL> select process,status,client_process,group#,thread#,sequence# from  V$MANAGED_STANDBY order by sequence#;
 ```
-![](./screenshots/NOAHscreenshots/src_switch.png)
+![](./screenshots/400screenshots/src_switch.png)
 
 ***ON TARGET***
 The sequence # that was writing should now be receiving / applying.
@@ -589,14 +589,14 @@ $ sqlplus / as sysdba
 SQL> set lines 200
 SQL> select process,status,client_process,group#,thread#,sequence# from  V$MANAGED_STANDBY order by sequence#;
 ```
-![](./screenshots/NOAHscreenshots/trgt_switch.png)
+![](./screenshots/400screenshots/trgt_switch.png)
 
 You can also check the alert log, by looking for sequence numbers that are in transit.
 ```
 $ cd cd $ORACLE_BASE/diag/rdbms/{target_unqname_lowercase}/{target_sid}/trace
 $ tail -30 alert_{target_sid}.log
 ```
-![](./screenshots/NOAHscreenshots/trgt_switch_alertlog.png)
+![](./screenshots/400screenshots/trgt_switch_alertlog.png)
 
 [Top](#Table-of-Contents)
 <!-- POST DUPLICATION SECTION END -->
@@ -621,7 +621,7 @@ On our source, there is one PDB named "SRC_PDB", so let's check our standby.
 $ sqlplus / as sysdba
 SQL> sho pdbs
 ```
-![](./screenshots/NOAHscreenshots/stby_pdbs_check.png)
+![](./screenshots/400screenshots/stby_pdbs_check.png)
 
 As you can see it was replicated, this is good obviously. Notice it's in READ ONLY mode, this is because this in an Active Data Guard (which means the database is always a read only version.)
 
@@ -640,7 +640,7 @@ SQL> col type format a10
 SQL> col name format a10
 SQL> select name, cause, type, message, status from pdb_plug_in_violations where type='ERROR' and status='PENDING';
 ```
-![](./screenshots/NOAHscreenshots/pdb_pending_violations.png)
+![](./screenshots/400screenshots/pdb_pending_violations.png)
 
 [Top](#Table-of-Contents)
 
@@ -682,7 +682,7 @@ where
    df.tablespace_name = fs.tablespace_name
    order by 1;
 ```
-![](./screenshots/NOAHscreenshots/free_tablespace.png)
+![](./screenshots/400screenshots/free_tablespace.png)
 
 If you need to add space to a tablespace, use the below -:
 ```
@@ -712,13 +712,13 @@ insert into DG_LAB_TEST values(3);
 
 commit;
 ```
-![](./screenshots/NOAHscreenshots/prim_table_made.png)
+![](./screenshots/400screenshots/prim_table_made.png)
 
 ***ON PRIMARY***
 ```
 SQL > select * from DG_LAB_TEST;
 ```
-![](./screenshots/NOAHscreenshots/prim_select_all.png)
+![](./screenshots/400screenshots/prim_select_all.png)
 
 Now, let's check on the Standby (wait a minute or so, usually ~10 seconds depending on latency.)
 
@@ -728,7 +728,7 @@ $ sqlplus / as sysdba
 SQL > alter session set container={PDB_NAME};
 SQL > select * from DG_LAB_TEST;
 ```
-![](./screenshots/NOAHscreenshots/stby_select_all.png)
+![](./screenshots/400screenshots/stby_select_all.png)
 
 
 
