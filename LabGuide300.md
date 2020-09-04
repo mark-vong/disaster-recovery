@@ -5,8 +5,7 @@
 [Step 2: Creating a Data Guard association](#step-2-creating-a-data-guard-association)
 
 [Step 3: Connecting to databases & testing Data Guard build](#step-3-connecting-to-databases--testing-data-guard-build) -->
-# OCI Data Guard
----
+# OCI Active Data Guard
 
 ## Step 1: Provisioning the Primary database
 

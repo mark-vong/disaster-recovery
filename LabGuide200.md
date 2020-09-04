@@ -1,4 +1,4 @@
-# Lab 400: Using Rsync for application file sync
+# Using Rsync for application file sync
 <!-- Comment out table of contents
 ## Table of Contents
 [Introduction](#introduction)
