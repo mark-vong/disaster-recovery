@@ -71,7 +71,7 @@ Now, scroll down and click on **Data Guard Associations** on the left side, then
 
 ![](./screenshots/300screenshots/2_3.png)
 
-Enter the **Data Guard Association** details. Then click **Enable Data Guard**. (_Note: this may take up to anhour or more to completely finish. You will also see a new database system appear with the name you provided_.)
+Enter the **Data Guard Association** details. Then click **Enable Data Guard**. (_Note: this may take up to an hour or more to completely finish. You will also see a new database system appear with the name you provided_.)
 
 ![](./screenshots/300screenshots/2_4.png)
 
@@ -138,8 +138,102 @@ SQL> select * from employees;
 
 ![](./screenshots/300screenshots/3_9.png)
 
-### Congratulations! You have successfully completed this lab and configured a Data Guard build.
+### Congratulations! You have successfully configured a Data Guard build.
 
-[Back to Top](#table-of-contents)
+## Step 4: Performing a Data Guard Switchover 
+
+Data Guard switchovers are performed for events that are planned. The primary and standby databases reverse roles so that the needed measures can be performed on the respective database.
+
+To start a switchover, click on the database that is currently the **Primary**.
+
+![](./screenshots/300screenshots/4_1.png)
+
+Click on the database name.
+
+![](./screenshots/300screenshots/4_2.png)
+
+On the left side, click on **Data Guard Associations**, then click on the **three dots** to open a sub-menu. Then simply click **Switchover**.
+
+![](./screenshots/300screenshots/4_3.png)
+
+Enter the database password then wait for the work requests to finish (_Note: this usually takes about 10 - 15 minutes to complete_.)
+
+![](./screenshots/300screenshots/4_4.png)
+
+After it has completed, click on your **NEW PRIMARY** database. In our case, it's called **StandbyDatabase**. (_Remember, the roles have been reversed_!)
+
+![](./screenshots/300screenshots/4_5.png)
+
+![](./screenshots/300screenshots/4_6.png)
+
+Connect to the database and check its role to verify.
+
+```
+$ select name, database_role, open_mode from v$database;
+```
+
+![](./screenshots/300screenshots/4_7.png)
+
+### Switchover is now complete!
+
+## Step 5: Performing a Data Guard Failover
+
+Data Guard failovers are used for unforeseen disasters or downtime that is not planned. Data Guard will failover to the standby database from the primary in the event of any disaster or unplanned downtime. 
+
+To failover to the standby database, we will navigate to the current **STANDBY** database (_Note: our **PrimaryDatabase** is our primary and our **StandbyDatabase** is our standby for this scenario_.)
+
+![](./screenshots/300screenshots/5_1.png)
+
+Click on the database name. It should be inside the **STANDBY DATABASE** DB system.
+
+![](./screenshots/300screenshots/5_2.png)
+
+On the left side, click on **Data Guard Associations**, then click on the **three dots** to open the sub-menu. Click on **Failover**.
+
+![](./screenshots/300screenshots/5_3.png)
+
+Enter the database password and click **OK**. This may take a bit to update and complete.
+
+![](./screenshots/300screenshots/5_4.png)
+
+Log into the **STANDBY DATABASE** server to verify that the database role has been changed to **Primary**. 
+
+```
+$ select name, database_role, open_mode from v$database;
+```
+
+![](./screenshots/300screenshots/5_5.png)
+
+### Success! At this point, you have completed the failover.
+
+
+Now, navigate back to the **StandbyDatabase** DB system and look at the **Peer Role** under **Data Guard Associations**. It shows **Disabled Standby** which also reaffirms that the failover was successful.
+
+![](./screenshots/300screenshots/5_6.png)
+
+To resume Data Guard after a failover, you will have to **reinstate** the database that is in standby.
+
+Simply click on the **three dots** and click **reinstate**.
+
+![](./screenshots/300screenshots/5_7.png)
+
+Enter the DB password and click **OK**. This should take about 10 - 15 minutes.
+
+![](./screenshots/300screenshots/5_8.png)
+
+Wait for the databases to update.
+
+![](./screenshots/300screenshots/5_9.png)
+
+After they are updated and available, log into the **PrimaryDatabase** DB system server to verify that the database role shows **Physical Standby**. (_Note: remember that our **StandbyDatabase** is acting as our Primary database after the failover. So that means that the **PrimaryDatabase** will act as the Standby database_.)
+
+![](./screenshots/300screenshots/5_10.png)
+
+### Success! You have completed the Data Guard reinstatement. If needed, you may also switchover again. 
+
+### Great job, you've successfully completed this lab!
+
+
+<!-- [Back to Top](#table-of-contents) -->
 
 
