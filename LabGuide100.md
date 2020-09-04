@@ -14,10 +14,10 @@ This solution provides a Network Architecture deployment to demonstrate Disaster
 ## Quickstart Deployment
 
 1. Clone this repository to your local host. The `pilot-light` directory contains the Terraform configurations for a sample topology based on the architecture described earlier.
-    ```
-    $ git clone XXXX
-    $ cd disaster-recovery/pilot-light
-    ```
+```
+$ git clone XXXX
+$ cd disaster-recovery/pilot-light
+```
 
 2. [Install Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html). 
 
@@ -25,9 +25,9 @@ This solution provides a Network Architecture deployment to demonstrate Disaster
     The following example is using London as the primary region.
     ![](./screenshots/100screenshots/env-vars-example.PNG)
     
-   ```
-    $ source env-vars
-    ```
+```
+$ source env-vars
+```
     
 4. Create **terraform.tfvars** from *terraform.tfvars.sample* file with the inputs for the architecture that you want to build. A running sample terraform.tfvars file is available below. The contents of sample file can be copied to create a running terraform.tfvars input file. Update db_admin_password with actual password in terraform.tfvars file.
 
