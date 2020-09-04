@@ -29,7 +29,11 @@
   * [Creating a table on PRIMARY to see if it's replicated on STANDBY](#table_replication_test) -->
 
 <!-- <a name="why"></a> -->
-## Why Active Data Guard?
+
+
+## Introduction
+
+### Why Active Data Guard?
 Active Data Guard is when the standby database is in READ ONLY WITH APPLY.
 
 Some advantages -:
@@ -37,15 +41,21 @@ Some advantages -:
 *	Block corruptions are automatically repaired as long as the standby is running in real-time apply.
 *	To also reduce the load on a production, you can imitate RMAN backups from the standby instead of the primary.
 
-The Physical Standby can easily be opened if the Primary is lost. You first have to shut down the database, and bring it up in mount. You then issue a couple recover commands in SQL, and then activate the standby database. Once that’s all done, you can open it. You can read more about it on this website:
-https://dbaclass.com/article/how-to-open-standby-database-when-primary-database-is-lost/
+The Physical Standby can easily be opened if the Primary is lost. You first have to shut down the database, and bring it up in mount. You then issue a couple recover commands in SQL, and then activate the standby database. Once that’s all done, you can open it. 
 
+### Objectives
+- Understand the value of Oracle Active Data Guard.
+- Configure Active Data Guard manually on a virtual machine database.
+- Manually simulate a DR failover scenario using Manual Active Data Guard.
+
+### Extra Resources
+- [Opening a standby database after a failover](https://dbaclass.com/article/how-to-open-standby-database-when-primary-database-is-lost/)
 
 <!-- ASSUMPTIONS SECTION START -->
 <!-- ASSUMPTIONS SECTION START -->
 <!-- ASSUMPTIONS SECTION START -->
 <!-- <a name="Assumptions"></a> -->
-## Assumptions
+## Assumptions and Pre-requisites
 1. **Source** is Oracle Database 12c EE High Perf Release 12.2.0.1.0 - 64bit Production.
 2. **Target** has Oracle Database 12c EE High Perf Release 12.2.0.1.0 - 64bit Production **binaries**.
 3. If using OCI, both databases have appropriate security lists that can allow communication both ways.
