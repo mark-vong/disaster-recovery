@@ -11,104 +11,188 @@ This solution provides a Network Architecture deployment to demonstrate Disaster
 ### Extra Resources
 - [Introduction to OCI](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
 
+**Note:** This is **not** configure for a product environment. **This is just for demo purposes.**
+
 ## Quickstart Deployment
-
-1. Clone this repository to your local host. The `pilot-light` directory contains the Terraform configurations for a sample topology based on the architecture described earlier.
-```
-$ git clone XXXX
-$ cd disaster-recovery/pilot-light
-```
-
-2. [Install Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html). 
-
-3. Setup tenancy values for terraform variables by updating **env-vars** file with the required information. The file contains definitions of environment variables for your Oracle Cloud Infrastructure tenancy.
-    The following example is using London as the primary region.
-    ![](./screenshots/100screenshots/env-vars-example.PNG)
+### Prerequisites
+1.  Create your own private/public key pair on your local system.
+2.  Move the key pair to the resource-manager-bin folder.
+3.  Zip up all of the files from resource-manager-bin folder. The zip file name is not important.
+    Just make sure it has the following file structure.
     
-```
-$ source env-vars
-```
+        resource-manager-bin/
+        ├── assets 
+        │   ├── images
+        │   │   └── oracle.png
+        │   ├── scripts
+        │   │   ├── block-volume-migration.py
+        │   │   ├── boot-volume-migration.py
+        │   │   ├── cloud_init_checker.sh
+        │   │   └── README.md
+        │   └── templates
+        │       ├── bootstrap_dst.tpl
+        │       └── bootstrap_src.tpl
+        ├── data_sources.tf
+        ├── dr_schema.yaml
+        ├── id_rsa
+        ├── id_rsa.pub
+        ├── main.tf
+        ├── modules
+        │   ├── bastion_instance
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── dbaas
+        │   │   ├── main.tf
+        │   │   └── variables.tf
+        │   ├── iam
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── lb
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── network
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── object_storage
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── rsync
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── server
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   └── shared_fss
+        │       ├── main.tf
+        │       ├── outputs.tf
+        │       └── variables.tf
+        ├── outputs.tf
+        ├── providers.tf
+        ├── README.md
+        ├── terraform.tfvars
+        └── variables.tf
     
-4. Create **terraform.tfvars** from *terraform.tfvars.sample* file with the inputs for the architecture that you want to build. A running sample terraform.tfvars file is available below. The contents of sample file can be copied to create a running terraform.tfvars input file. Update db_admin_password with actual password in terraform.tfvars file.
+## Resource Manager
 
-    ![](./screenshots/100screenshots/terrform_var.PNG)
+The following section will show you how to configure resource manager to make the deployment easier. Anything that is 
+shaded out on the page. You will not be able to configure.
+
+### Configuration 
+
+1.  Navigate to the resource manager tab in oci. Next upload the zip file to the stack.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager.PNG)
     
-5. Deploy the topology:
+2.  Input the configuration for the instances.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Compute.PNG)
 
--   **Deploy Using Terraform**
+3.  Input the configuration for the vcn
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Network.PNG)
     
-    ```
-    $ terraform init
-    $ terraform plan
-    $ terraform apply
-    ```
-    When you’re prompted to confirm the action, enter yes.
+4.  Input the configuration for the load balancer and database
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB-DB.PNG)
+    
+5.  Input the configuration for the object storage.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-ObjStorage-FSS.PNG)
+    
+6.  Input the configuration for the keys. Since the keys are in the zip file. Make sure to put
+    "./" in front of the keys names.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys.PNG)
+    
+    ### Review process
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review.PNG)
+    
+    ### Plan
 
-    When all components have been created, Terraform displays a completion message. For example: Apply complete! Resources: nn added, 0 changed, 0 destroyed.
 
-6. If you want to delete the infrastructure, run:
-    First navigate to OCI Console and terminate the Standby database and once the termination is successfull then run the following command
-    ```
-    $ terraform destroy
-    ```
-    When you’re prompted to confirm the action, enter yes.
+1.  Select plan from the dropdown menu.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-1.PNG)
+    
+2.  Make sure everything looks okay and then proceed
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-2.PNG)
+
+3.  Wait unitl the icon turns green.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-3.PNG)
+    
+    ### Apply
+    
+    
+1.  Select apply from the dropdown menu. 
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-1.PNG)
+    
+2.  Wait until the icon turns green.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-2.PNG)
 
 
-## Inputs required in the terraform.tfvars file
-*Sample terraform.tfvars file to create Hyperion infrastructure in single availability domain architecture*
+### Destroy
+ If you want to delete the infrastructure.
+    First navigate to OCI Console and terminate the Standby database and once the termination is successful then resource manager can be used to destroy the environment.
+1.  Select destroy from the dropdown menu. 
+![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
+
+2.  Wait unitl the icon turns green.
+![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
+
+
+## Inputs
+*The following inputs are required for terraform modules:*
 
 ```
-DR region for standby (us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1)
-dr_region = "us-phoenix-1"
+Argument
+Description
 
-CIDR block of Standby VCN to be created
-dr_vcn_cidr_block = "10.0.0.0/16"
+dr_region
+standby region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1>
 
-CIDR block of Primary VCN to be created
-vcn_cidr_block = "192.168.0.0/16"
+dr_vcn_cidr_block
+CIDR block of the VCN (Virtual Cloud Network) to be created in standby region. make sure the VCN CIDR blocks of primary and standby regions do not overlap
 
-DNS label of VCN to be created
-vcn_dns_label = "drvcn"
+vcn_cidr_block
+CIDR block of the VCN (Virtual Cloud Network) to be created in primary region. make sure the VCN CIDR blocks of primary and standby regions do not overlap
 
-Object Storage bucker name (will be prefixed by region name)
-bucket_display_name = "bucket-dr"
+vcn_dns_label
+DNS Label of the VCN (Virtual Cloud Network) to be created.
 
-Compute shape for bastion server
-bastion_server_shape = "VM.Standard2.1"
+bucket_display_name
+Display name of the object storage bucket, this name will be prefixed with region name to keep unique name across regions
 
-Compute shape for application servers
-app_server_shape = "VM.Standard2.2"
+bastion_server_shape
+This is compute shape for bastion server. For more information on available shapes, see VM Shapes
 
-Database display name
-db_display_name = "ActiveDBSystem"
+app_server_shape
+This is compute shape for application servers deployed in primary region for hosting application. For more information on available shapes, see VM Shapes
 
-Compute shape for Database server
-db_system_shape = "VM.Standard2.2"
+db_display_name
+The user-provided name of the Database Home
 
-DB admin password for database
-db_admin_password = "AAbb__111"
+db_system_shape
+The shape of the DB system. The shape determines resources allocated to the DB system.For virtual machine shapes, the number of CPU cores and memory and for bare metal and Exadata shapes, the number of CPU cores, memory, and storage. To get a list of shapes, use the ListDbSystemShapes operation.
 
-shape for Load Balancer
-lb_shape = "100Mbps"
+db_admin_password
+A strong password for SYS, SYSTEM, PDB Admin and TDE Wallet. The password must be at least nine characters and contain at least two uppercase, two lowercase, two numbers, and two special characters. The special characters must be _, #, or -.
 
-Cron schedule for Primary region [this runs every 12 hours]
-cron_schedule = "0 */12 * * *"
+lb_shape
+A template that determines the total pre-provisioned bandwidth (ingress plus egress). To get a list of available shapes, use the ListShapes operation. Example: 100Mbps
 
-Cron schedule for Standby region, this is intentionally commented out as the replication job should run only on servers in primary regio [runs every 12 hours]
-dr_cron_schedule = "#0 */12 * * *"
+cron_schedule
+Cron schedule of backup/restore of boot/block volumes in Primary region. Example: "0 */12 * * *" this runs every 12 hours. This cron job runs on the bastion server
 
-path to public ssh key to set as the authorized key on the bastion host
-bastion_ssh_public_key_file  = "~/.ssh/id_rsa.pub"
+dr_cron_schedule
+Cron schedule of backup/restore of boot/block volumes in Standby region. Example: ""#0 */12 * * *"" this is commented out intentionally as the region is in standby mode. When switchover to this region happens then this should be uncommented
 
-path to private ssh key to access the bastion host
-bastion_ssh_private_key_file = "~/.ssh/id_rsa"
+snapshot_frequency
+Cron schedule for taking snapshots of file storage system in Primary region, this is taken on primary_app_server_1. Example "@hourly" for taking hourly snapshots
 
-path to public ssh key to set as the authorized key for all app instances 
-remote_ssh_public_key_file   = "~/.ssh/id_rsa.pub"
-
-path to private ssh key for all app instances
-remote_ssh_private_key_file  = "~/.ssh/id_rsa"
+data_sync_frequency
+Cron schedule for synchronizing the file storage system between both standby and primary region. The rsync job is run as part of this cron scheduler on the compute "dr_replication_server" in standby region. Example "*/30 * * * *" this runs every 30 minutes
 ```
+
 ## Example of the results terraform will produce.
  *Example: Instances in the Primary Region*
 
