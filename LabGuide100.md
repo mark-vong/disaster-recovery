@@ -212,6 +212,40 @@ Cron schedule for synchronizing the file storage system between both standby and
  
 ## Configuring the DNS for failover.
 
+### Create a Traffic Management Steering Policy
+1.![](./screenshots/100screenshots/traffic-management/2.png " ")
+
+From the OCI console, under networking go to the traffic steering policies.
+
+2.![](./screenshots/100screenshots/traffic-management/3.png " ")
+
+Create a failover traffic steering policy.
+
+3.![](./screenshots/100screenshots/traffic-management/4.png " ")
+
+This policy will point your DNS to your standby region's load balancer if your primary region's load balancer fails the health check. 
+
+4.![](./screenshots/100screenshots/traffic-management/5.png " ")
+
+You can get your load balancer IPs from Netowrking -> Load balancers. Make sure you are in the correct regions. 
+
+5.![](./screenshots/100screenshots/traffic-management/6.png " ")
+
+You can see, we switch regions on the upper right to get the IP of the LB in the standby region, Frankfurt.
+
+6.![](./screenshots/100screenshots/traffic-management/7.png " ")
+
+7.![](./screenshots/100screenshots/traffic-management/8.png " ")
+Input the information like above. 
+
+8.![](./screenshots/100screenshots/traffic-management/9.png " ")
+Make sure to attach the health check to your primary region's load balancer, this is what determines if traffic should be re-directed to your standby region. 
+
+9.![](./screenshots/100screenshots/traffic-management/1.png " ")
+10.![](./screenshots/100screenshots/traffic-management/1.png " ")
+
+This is a summary of your traffic steering policy.
+
 ### Create a new DNS zone
 1.![](./screenshots/100screenshots/DNS-Zone.png)
 
