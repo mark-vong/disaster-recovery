@@ -76,9 +76,9 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## Part 2. Syncing files between a local host and a remote server.
 
-### **Step 1:** Add the public key to your bastion server to your machine's key chain (authentication agent).
+### **Step 1:** Add the private key to your bastion server to your machine's key chain (authentication agent).
 ```
-<local_machine>$ ssh-add -k ~/<bastion_server_public_key>
+<local_machine>$ ssh-add -k ~/<bastion_server_private_key>
 ```
 
 ### **Step 2:** Next SSH into the remote server. There are two new flags to consider:
@@ -110,7 +110,7 @@ opc@<remote_server>$ ls
 ### **Step 6:** We will now do a dry-run sync of the folder and its file from our local machine to the remote server. The syntax will differ a bit from Part 1 as we are leveraging a new option flag:
 #### "-e" allows us to execute shell commands. We'll leverage this to hop into the remote server from the bastion server.
 ```
-<local_machine>$ rsync -avP "ssh -A -J opc@<bastion_public_ip>" app_files opc@<app_server_private_ip>:/home/opc/ -n
+<local_machine>$ rsync -avP -e "ssh -A -J opc@<bastion_public_ip>" app_files opc@<app_server_private_ip>:/home/opc/ -n
 ```
 
 ### **Step 7:** After testing the sync with the "-n" flag, remove it and re-run the command. You should now see that the "app_files" folder and its contents are synced to the remote server. Navigate to the remote server terminal and verify.

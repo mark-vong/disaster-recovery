@@ -242,7 +242,8 @@ Input the information like above.
 Make sure to attach the health check to your primary region's load balancer, this is what determines if traffic should be re-directed to your standby region. 
 
 9.![](./screenshots/100screenshots/traffic-management/1.png " ")
-10.![](./screenshots/100screenshots/traffic-management/1.png " ")
+
+10.![](./screenshots/100screenshots/traffic-management/Failover-Policy.png " ")
 
 This is a summary of your traffic steering policy.
 
