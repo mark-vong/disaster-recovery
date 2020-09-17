@@ -151,6 +151,72 @@ command: command to execute
 ```
 ### Great, the sync will now automate for the proposed period of time!
 
+## Part 4: Simulating DR with Rsync
+
+### Step 1: SSH into both of your regional application servers using the SSH agent.
+```
+<local_machine>$ ssh-add -k <private_key>
+
+<local_machine>$ ssh -A -J opc@<bastion_public_ip> opc@<app_server_private_ip>
+```
+
+### Step 2: Change the owner and group of the application server folder and index file to opc user. Do this for both of your application servers.
+```
+opc@<app_server>$ chown opc:opc /var/www/html
+
+opc@<app_server>$ chown opc:opc /var/www/html/index.html
+``` 
+
+### Step 3: Edit the index.html file in your primary application server your liking. You may add additional html tags or change the text to reflect the change.
+```
+opc@<app_server_1>$ vi /var/www/html/index.html
+```
+
+### Step 4: Use Rsync to synchronize the changes from the primary app server to the standby app server. Make sure that your private RSA key is present somewhere in the current application server.
+```
+opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html -n  // Dry-run
+
+opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html -n  // Executes
+```
+
+### Step 5: Verify that the changes were synchronized between the application server index files.
+```
+opc@<app_server_1>$ cat /var/www/html/index.html
+
+opc@<app_server_2>$ cat /var/www/html/index/html
+```
+
+### Step 6: Simulate DR scenario.
+
+![](./screenshots/200screenshots/1.png)
+
+Navigate from the upper left hamburger menu to networking -> Load balancers. Find the Load Balancer in your primary region.
+
+![](./screenshots/200screenshots/2.png)
+
+Go to your backend set. 
+
+![](./screenshots/200screenshots/3.png)
+
+Check mark your backends. Then press actions.
+
+![](./screenshots/200screenshots/4.png)
+
+Set the drain state to True. This will stop all current connections and simulate the disaster. 
+
+![](./screenshots/200screenshots/5.png)
+
+Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your standby region. 
+![](./screenshots/200screenshots/300a.png)
+
+If you installed the HTML to your standby server, you should now see this. You can see our DNS entry - 'oci.life' with the subdomain 'alexmcdonald'.
+![](./screenshots/200screenshots/300c.png)
+
+If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
+
+Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your standby region. 
+
+
 
 ## Summary
 
