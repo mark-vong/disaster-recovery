@@ -209,9 +209,6 @@ Set the drain state to True. This will stop all current connections and simulate
 Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your standby region. 
 ![](./screenshots/200screenshots/300a.png)
 
-If you installed the HTML to your standby server, you should now see this. You can see our DNS entry - 'oci.life' with the subdomain 'alexmcdonald'.
-![](./screenshots/200screenshots/300c.png)
-
 If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
 Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your standby region. 
