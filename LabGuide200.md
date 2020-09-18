@@ -222,7 +222,7 @@ Now, enter your DNS url in your web browswer, you should see the HTML indicating
 
 ## Summary
 
--   In this lab, you learned how to use rsync to sync files on a local machine, fm a local machine to a remote server. We also dove into simulating a DR scenario as well.
+-   In this lab, you learned how to use rsync to sync files on a local machine, how to sync from a local machine to a remote server and how to recover from a DR scenario.
 
 -   **You are ready to move on to the next lab!**
 
