@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This solution provides a Network Architecture deployment to demonstrate Disaster Recovery scenario across 2 regions [examples are geared towards region Ashburn & Phoenix, but any region in OCI can be used].
+This solution provides a Network Architecture deployment to demonstrate Disaster Recovery scenario across regions.
 
 ### Objectives
 - Deploy DR network and infrastructure on OCI using Terraform.
@@ -81,7 +81,7 @@ shaded out on the page. You will not be able to configure.
 3.  Input the configuration for the vcn
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Network.PNG)
     
-4.  Input the configuration for the load balancer and database
+4.  Input the configuration for the load balancer
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB.PNG)
     
 5.  Input the configuration for the keys. Since the keys are in the zip file. Make sure to put
