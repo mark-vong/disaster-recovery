@@ -115,7 +115,7 @@ shaded out on the page. You will not be able to configure.
 
 ### Destroy
  If you want to delete the infrastructure.
-    First navigate to OCI Console and terminate the Standby database and once the termination is successful then resource manager can be used to destroy the environment.
+    First navigate to OCI Console and terminate the DR database and once the termination is successful then resource manager can be used to destroy the environment.
 1.  Select destroy from the dropdown menu. 
 ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
 
@@ -134,13 +134,13 @@ region
 primary region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1 
 
 dr_region
-standby region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1
+DR region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1
 
 dr_vcn_cidr_block
-CIDR block of the VCN (Virtual Cloud Network) to be created in standby region. make sure the VCN CIDR blocks of primary and standby regions do not overlap
+CIDR block of the VCN (Virtual Cloud Network) to be created in DR region. make sure the VCN CIDR blocks of primary and DR regions do not overlap
 
 vcn_cidr_block
-CIDR block of the VCN (Virtual Cloud Network) to be created in primary region. make sure the VCN CIDR blocks of primary and standby regions do not overlap
+CIDR block of the VCN (Virtual Cloud Network) to be created in primary region. make sure the VCN CIDR blocks of primary and DR regions do not overlap
 
 vcn_dns_label
 DNS Label of the VCN (Virtual Cloud Network) to be created.
@@ -177,7 +177,7 @@ Create a failover traffic steering policy.
 
 3.![](./screenshots/100screenshots/traffic-management/4.png " ")
 
-This policy will point your DNS to your standby region's load balancer if your primary region's load balancer fails the health check. 
+This policy will point your DNS to your DR region's load balancer if your primary region's load balancer fails the health check. 
 
 4.![](./screenshots/100screenshots/traffic-management/5.png " ")
 
@@ -185,7 +185,7 @@ You can get your load balancer IPs from Netowrking -> Load balancers. Make sure 
 
 5.![](./screenshots/100screenshots/traffic-management/6.png " ")
 
-You can see, we switch regions on the upper right to get the IP of the LB in the standby region, Frankfurt.
+You can see, we switch regions on the upper right to get the IP of the LB in the DR region, Frankfurt.
 
 6.![](./screenshots/100screenshots/traffic-management/7.png " ")
 
@@ -193,7 +193,7 @@ You can see, we switch regions on the upper right to get the IP of the LB in the
 Input the information like above. 
 
 8.![](./screenshots/100screenshots/traffic-management/9.png " ")
-Make sure to attach the health check to your primary region's load balancer, this is what determines if traffic should be re-directed to your standby region. 
+Make sure to attach the health check to your primary region's load balancer, this is what determines if traffic should be re-directed to your DR region. 
 
 9.![](./screenshots/100screenshots/traffic-management/1.png " ")
 

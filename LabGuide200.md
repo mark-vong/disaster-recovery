@@ -27,10 +27,10 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## Part 1. Syncing files between two folders on the same local machine.
 
-### **Step 1:** Create two folders. Name one "primary_sync" and the other "standby_sync".
+### **Step 1:** Create two folders. Name one "primary_sync" and the other "DR_sync".
 
 ```
-<local_machine>$ mkdir primary_sync standby_sync
+<local_machine>$ mkdir primary_sync DR_sync
 
 <local_machine>$ ls 
 ```
@@ -43,10 +43,10 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ls primary_sync 
 ```
 
-### **Step 3:** Verify that only "primary_sync" has a file in it and "standby_sync" is empty.
+### **Step 3:** Verify that only "primary_sync" has a file in it and "DR_sync" is empty.
 
 ```
-<local_machine>$ ls primary_sync/ standby_sync/
+<local_machine>$ ls primary_sync/ DR_sync/
 ```
 
 ### Before we use rsync to sync the file between the folders, a little about the option flags we'll be using:
@@ -58,16 +58,16 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 ### **Step 4:** Great, now let's execute our first sync between the two folders. Let's include the "-n" flag first to make sure everything is in place before we actually sync the file.
 
 ```
-<local_machine>$ rsync -avP primary_sync/ standby_sync -n
+<local_machine>$ rsync -avP primary_sync/ DR_sync -n
 
-<local_machine>$ ls primary_sync/ standby_sync/
+<local_machine>$ ls primary_sync/ DR_sync/
 ```
 
-### **Step 5:** Removing the "-n" flag will sync the file over to the "standby_sync" folder.
+### **Step 5:** Removing the "-n" flag will sync the file over to the "DR_sync" folder.
 ```
-<local_machine>$ rsync -avP primary_sync/ standby_sync 
+<local_machine>$ rsync -avP primary_sync/ DR_sync 
  
-<local_machine>$ ls primary_sync/ standby_sync/
+<local_machine>$ ls primary_sync/ DR_sync/
 ```
 ### Nice work! You've successfully used rsync to sync a file between two local folders.
 
@@ -172,7 +172,7 @@ opc@<app_server>$ chown opc:opc /var/www/html/index.html
 opc@<app_server_1>$ vi /var/www/html/index.html
 ```
 
-### Step 4: Use Rsync to synchronize the changes from the primary app server to the standby app server. Make sure that your private RSA key is present somewhere in the current application server.
+### Step 4: Use Rsync to synchronize the changes from the primary app server to the DR app server. Make sure that your private RSA key is present somewhere in the current application server.
 ```
 opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html -n  // Dry-run
 
@@ -206,12 +206,12 @@ Set the drain state to True. This will stop all current connections and simulate
 
 ![](./screenshots/200screenshots/5.png)
 
-Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your standby region. 
+Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your DR region. 
 ![](./screenshots/200screenshots/300a.png)
 
 If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
-Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your standby region. 
+Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your DR region. 
 
 
 
