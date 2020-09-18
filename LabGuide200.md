@@ -183,7 +183,7 @@ opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_privat
 ```
 opc@<app_server_1>$ cat /var/www/html/index.html
 
-opc@<app_server_2>$ cat /var/www/html/index/html
+opc@<app_server_2>$ cat /var/www/html/index.html
 ```
 
 ### Step 6: Simulate DR scenario.
