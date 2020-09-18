@@ -41,10 +41,10 @@ variableGroups:
       - lb_shape
       - is_private_lb
 
-  - title: "Database Configuration"
-    variables:
-      - db_display_name
-      - db_admin_password
+#  - title: "Database Configuration"
+#    variables:
+#      - db_display_name
+#      - db_admin_password
 
 #  - title: "Object Storage Configuration"
 #    variables:

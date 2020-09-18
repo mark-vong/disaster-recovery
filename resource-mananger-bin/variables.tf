@@ -91,23 +91,6 @@ variable app_server_shape {
   default     = "VM.Standard2.2"
 }
 
-variable "db_display_name" {
-  type        = string
-  description = "display name of app server2"
-  default     = "ActiveDBSystem"
-}
-
-variable "db_system_shape" {
-  type        = string
-  description = "shape of database instance"
-  default     = "VM.Standard2.2"
-}
-
-variable "db_admin_password" {
-  type        = string
-  description = "password for SYS, SYSTEM, PDB Admin and TDE Wallet."
-}
-
 variable lb_shape {
   type        = string
   description = "A template that determines the total pre-provisioned bandwidth (ingress plus egress). Choose appropriate value based on the shapes available for the tenancy"
