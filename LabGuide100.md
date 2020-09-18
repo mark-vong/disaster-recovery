@@ -82,7 +82,7 @@ shaded out on the page. You will not be able to configure.
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Network.PNG)
     
 4.  Input the configuration for the load balancer and database
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB-DB.PNG)
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB.PNG)
     
 5.  Input the configuration for the keys. Since the keys are in the zip file. Make sure to put
     "./" in front of the keys names.
