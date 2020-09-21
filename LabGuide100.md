@@ -84,8 +84,7 @@ shaded out on the page. You will not be able to configure.
 4.  Input the configuration for the load balancer
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB.PNG)
     
-5.  Input the configuration for the keys. Since the keys are in the zip file. Make sure to put
-    "./" in front of the keys names.
+5.  Input the configuration for the keys. Since the keys are in the zip file and in the keys folder, make sure to put "./keys/" in front of the key names.
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys-N.PNG)
     
     ### Review process
@@ -166,6 +165,23 @@ A template that determines the total pre-provisioned bandwidth (ingress plus egr
  
 ## Configuring the DNS for failover.
 
+### Create a Health Check
+1.![](./screenshots/100screenshots/health-check/health-check-console.png)
+
+2.![](./screenshots/100screenshots/health-check/health-check-name.png)
+
+3.![](./screenshots/100screenshots/health-check/health-check-port.png)
+
+4.![](./screenshots/100screenshots/health-check/health-check-tag.png)
+
+### Create a new DNS zone
+1.![](./screenshots/100screenshots/dns-zone/dns-zone-console.png)
+
+2.![](./screenshots/100screenshots/dns-zone/dns-zone-create.png)
+
+3.![](./screenshots/100screenshots/dns-zone/dns-zone-info.png)
+
+
 ### Create a Traffic Management Steering Policy
 1.![](./screenshots/100screenshots/traffic-management/2.png " ")
 
@@ -175,45 +191,44 @@ From the OCI console, under networking go to the traffic steering policies.
 
 Create a failover traffic steering policy.
 
-3.![](./screenshots/100screenshots/traffic-management/4.png " ")
+3.![](./screenshots/100screenshots/traffic-management/policy-name.png " ")
 
 This policy will point your DNS to your DR region's load balancer if your primary region's load balancer fails the health check. 
 
-4.![](./screenshots/100screenshots/traffic-management/5.png " ")
+4.![](./screenshots/100screenshots/traffic-management/primary-lb.png " ")
 
-You can get your load balancer IPs from Netowrking -> Load balancers. Make sure you are in the correct regions. 
+You can get your load balancer IPs from Networking -> Load balancers. Make sure you are in the correct regions. 
 
-5.![](./screenshots/100screenshots/traffic-management/6.png " ")
+5.![](./screenshots/100screenshots/traffic-management/dr-lb.png " ")
 
-You can see, we switch regions on the upper right to get the IP of the LB in the DR region, Frankfurt.
+You can see, we switch regions on the upper right to get the IP of the LB in the DR region, Phoenix.
 
-6.![](./screenshots/100screenshots/traffic-management/7.png " ")
+6.![](./screenshots/100screenshots/traffic-management/answer-pool-1.png " ")
 
-7.![](./screenshots/100screenshots/traffic-management/8.png " ")
+7.![](./screenshots/100screenshots/traffic-management/answer-pool-2.png " ")
 Input the information like above. 
 
-8.![](./screenshots/100screenshots/traffic-management/9.png " ")
-Make sure to attach the health check to your primary region's load balancer, this is what determines if traffic should be re-directed to your DR region. 
+8.![](./screenshots/100screenshots/traffic-management/pool-priority.png " ")
+![](./screenshots/100screenshots/traffic-management/attach-health-check.png " ")
+Make sure to attach the previously created health check of your primary load balancer, this is what determines if traffic should be re-directed to your DR region. 
 
-9.![](./screenshots/100screenshots/traffic-management/1.png " ")
+9.![](./screenshots/100screenshots/traffic-management/attach-domain.png " ")
+Provide a subdomain name and attach the previously created DNS zone as an attached domain. 
 
-10.![](./screenshots/100screenshots/traffic-management/Failover-Policy.png " ")
+10.![](./screenshots/100screenshots/traffic-management/summary.png " ")
 
 This is a summary of your traffic steering policy.
 
-### Create a new DNS zone
-1.![](./screenshots/100screenshots/DNS-Zone.png)
 
-2.![](./screenshots/100screenshots/DNS-Zone-Information.png)
 
-### Attach a subdomain to the DNS zone
+<!-- ### Attach a subdomain to the DNS zone
 1.![](./screenshots/100screenshots/DNS-Zone-Subdomain-Step1.png)
 
 2.![](./screenshots/100screenshots/DNS-Zone-Subdomain-Step2.png)
 
 3.Publish to finish attaching.
 
-![](./screenshots/100screenshots/Failover-Policy-Publish.png)
+![](./screenshots/100screenshots/Failover-Policy-Publish.png) -->
 
 <!-- # Adding Html to the compute instances.
 
