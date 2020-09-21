@@ -8,18 +8,23 @@
 
 Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its **delta-transfer algorithm** that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. **Rsync** is used extensively in **backups**, **disaster recovery**, and **mirroring** scenarios. 
 
-**For this lab specifically, we will be working in the terminal exclusively. As a result, we've included the commands to run as we walk you through the lab steps.** 
+**For this lab specifically, we will be working in the terminal and in the OCI console. As a result, we've included the commands to run as we walk you through the lab steps.** 
 
 **In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync.** 
 
-**In the second and final part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.**
+**In the second part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.**
 
-**This lab will leverage the existing infrastructure that was created previously from the terraform script.** 
+**In the third and optional part of the lab, we'll go through the steps of automating rsync by setting it up as a cron job.**
+
+**In the fourth and final part of the lab, we'll go through the steps of simulating a DR scenario.**
+
+**This lab will leverage the existing infrastructure that was created in the previous lab.** 
 
 ### Objectives
 - Understand the syntax of **rsync**.
 - Sync files locally.
 - Sync files between a local host and a remote server.
+- Simulate DR scenario for application tier.
 
 ### Extra Resources
 -   To learn more about rsync, please refer to the following Linux documentation: [rsync](https://linux.die.net/man/1/rsync)
@@ -151,7 +156,7 @@ command: command to execute
 ```
 ### Great, the sync will now automate for the proposed period of time!
 
-## Part 4: Simulating DR with Rsync
+## Part 4: Simulating DR with Rsync.
 
 ### Step 1: SSH into both of your regional application servers using the SSH agent.
 ```
@@ -217,7 +222,7 @@ Now, enter your DNS url in your web browswer, you should see the HTML indicating
 
 ## Summary
 
--   In this lab, you learned how to use rsync to sync files on a local machine as well as from a local machine to a remote server.
+-   In this lab, you learned how to use rsync to sync files on a local machine, how to sync from a local machine to a remote server and how to recover from a DR scenario.
 
 -   **You are ready to move on to the next lab!**
 
