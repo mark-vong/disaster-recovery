@@ -3,8 +3,8 @@
 #changes
 
 #ssh keys paths
-ssh_public_key_file = "./keys/id_rsa.pub"
-ssh_private_key_file = "./keys/id_rsa"
+# ssh_public_key_file = "./keys/id_rsa.pub"
+# ssh_private_key_file = "./keys/id_rsa"
 
 # DB admin password for database
 # db_admin_password = "Welcome123"

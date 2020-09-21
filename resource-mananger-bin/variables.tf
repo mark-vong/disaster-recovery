@@ -60,11 +60,13 @@ variable "is_private_lb" {
 variable "ssh_public_key_file" {
   type        = string
   description = "path to public ssh key for all instances deployed in the environment"
+  default = "./keys/id_rsa.pub"
 }
 
 variable "ssh_private_key_file" {
   type        = string
   description = "path to private ssh key to acccess all instance in the deployed environment"
+  default = "./keys/id_rsa"
 } 
 
 variable bastion_server_shape {

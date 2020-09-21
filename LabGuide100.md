@@ -86,10 +86,10 @@ shaded out on the page. You will not be able to configure.
     
 5.  Input the configuration for the keys. Since the keys are in the zip file. Make sure to put
     "./" in front of the keys names.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys.PNG)
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys-N.PNG)
     
     ### Review process
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review.PNG)
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review-N.PNG)
     
     ### Plan
 
@@ -158,11 +158,11 @@ A template that determines the total pre-provisioned bandwidth (ingress plus egr
 ## Example of the results terraform will produce.
  *Example: Instances in the Primary Region*
 
- ![](./screenshots/100screenshots/App-Server(Primary).PNG)
+ ![](./screenshots/100screenshots/App-Server(Primary)-N.PNG)
 
  *Example: Instance in the Secondary Region*
 
- ![](./screenshots/100screenshots/App-Server(Secondary).png)
+ ![](./screenshots/100screenshots/App-Server(Secondary)-N.png)
  
 ## Configuring the DNS for failover.
 
