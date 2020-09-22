@@ -19,11 +19,6 @@
             "title": "Lab 300: OCI Active Data Guard",
             "publisheddate": "09/03/2020",
             "filename": "LabGuide300.md"
-        },
-        {            
-            "title": "Lab 400: Manual Active Data Guard",
-            "publisheddate": "09/03/2020",
-            "filename": "LabGuide400.md"
         }
      ]
 }
