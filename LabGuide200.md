@@ -32,7 +32,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## Part 1. Syncing files between two folders on the same local machine.
 
-### **Step 1:** Create two folders. Name one \"primary\_sync\" and the other \"DR\_sync\".
+### **Step 1:** Create two folders. Name one "primary\_sync" and the other "DR\_sync".
 
 ```
 <local_machine>$ mkdir primary_sync DR_sync
@@ -48,7 +48,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ls primary_sync 
 ```
 
-### **Step 3:** Verify that only \"primary\_sync\" has a file in it and \"DR\_sync\" is empty.
+### **Step 3:** Verify that only "primary\_sync" has a file in it and "DR\_sync" is empty.
 
 ```
 <local_machine>$ ls primary_sync/ DR_sync/
