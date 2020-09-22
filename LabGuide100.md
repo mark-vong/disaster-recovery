@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This solution provides a Network Architecture deployment to demonstrate Disaster Recovery scenario across regions.
+This solution provides a Network Architecture deployment to demonstrate a Disaster Recovery scenario across regions.
 
 ### Objectives
 - Deploy DR network and infrastructure on OCI using Terraform.
@@ -11,7 +11,7 @@ This solution provides a Network Architecture deployment to demonstrate Disaster
 ### Extra Resources
 - [Introduction to OCI](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
 
-**Note:** This is **not** configure for a product environment. **This is just for demo purposes.**
+**Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
 ## Quickstart Deployment
 ### Prerequisites
@@ -130,7 +130,7 @@ Argument
 Description
 
 region
-primary region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1 
+Primary region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1 
 
 dr_region
 DR region in which to operate, example: us-ashburn-1, us-phoenix-1, ap-seoul-1, ap-tokyo-1, ca-toronto-1
@@ -145,10 +145,10 @@ vcn_dns_label
 DNS Label of the VCN (Virtual Cloud Network) to be created.
 
 bastion_server_shape
-This is compute shape for bastion server. For more information on available shapes, see VM Shapes
+This is the compute shape for bastion server. For more information on available shapes, see VM Shapes
 
 app_server_shape
-This is compute shape for application servers deployed in primary region for hosting application. For more information on available shapes, see VM Shapes
+This is the compute shape for application servers deployed in primary region for hosting application. For more information on available shapes, see VM Shapes
 
 lb_shape
 A template that determines the total pre-provisioned bandwidth (ingress plus egress). To get a list of available shapes, use the ListShapes operation. Example: 100Mbps
@@ -159,7 +159,7 @@ A template that determines the total pre-provisioned bandwidth (ingress plus egr
 
  ![](./screenshots/100screenshots/App-Server(Primary)-N.PNG)
 
- *Example: Instance in the Secondary Region*
+ *Example: Instance in the DR Region*
 
  ![](./screenshots/100screenshots/App-Server(Secondary)-N.png)
  
