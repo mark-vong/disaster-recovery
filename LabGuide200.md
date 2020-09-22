@@ -217,7 +217,7 @@ If you visit the IP address of this load balancer, you will get 502 bad gateway.
 
 **Before the drained state:**
 
->**Primary Region:**
+>Primary Region:
 >![](./screenshots/200screenshots/prim-region-ip.png)
 
 **DR Region:**
