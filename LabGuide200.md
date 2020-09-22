@@ -215,15 +215,21 @@ If you navigate to health/check traffic steering - you can see the health for th
 
 If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
-Before the drained state:
+**Before the drained state:**
 
-![](./screenshots/200screenshots/prim-region-ip.png)
+>**Primary Region:**
+>![](./screenshots/200screenshots/prim-region-ip.png)
 
+**DR Region:**
 ![](./screenshots/200screenshots/dr-region-ip.png)
 
-After draining the backend set:
+**After draining the backend set:**
 
+**Primary Region:**
 ![](./screenshots/200screenshots/prim-region-drained-ip.png)
+
+**DR Region:**
+![](./screenshots/200screenshots/dr-region-ip.png)
 
 
 Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your DR region. 
