@@ -181,7 +181,7 @@ opc@<app_server_1>$ vi /var/www/html/index.html
 ```
 opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html -n  // Dry-run
 
-opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html -n  // Executes
+opc@<app_server_1>$ rsync -avP /var/www/html/index.html opc@<app_server_2_private_ip>:/var/www/html/index.html     // Executes
 ```
 
 ### Step 5: Verify that the changes were synchronized between the application server index files.
@@ -193,26 +193,25 @@ opc@<app_server_2>$ cat /var/www/html/index.html
 
 ### Step 6: Simulate DR scenario.
 
-![](./screenshots/200screenshots/1.png)
+![](./screenshots/200screenshots/lb-info.png)
 
 Navigate from the upper left hamburger menu to networking -> Load balancers. Find the Load Balancer in your primary region.
 
-![](./screenshots/200screenshots/2.png)
+![](./screenshots/200screenshots/lb-backend-set.png)
 
 Go to your backend set. 
 
-![](./screenshots/200screenshots/3.png)
+![](./screenshots/200screenshots/lb-backend-set-actions.png)
 
 Check mark your backends. Then press actions.
 
-![](./screenshots/200screenshots/4.png)
+![](./screenshots/200screenshots/lb-backend-set-drain.png)
 
 Set the drain state to True. This will stop all current connections and simulate the disaster. 
 
-![](./screenshots/200screenshots/5.png)
+![](./screenshots/200screenshots/policy-answer-data.png)
 
 Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your DR region. 
-![](./screenshots/200screenshots/300a.png)
 
 If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
