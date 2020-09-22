@@ -22,7 +22,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
     
         resource-manager-bin/
         ├── assets 
-        │   ├── images
+        │   ├── images
         │   │   └── oracle.png
         │   ├── scripts
         │   │   ├── block-volume-migration.py
