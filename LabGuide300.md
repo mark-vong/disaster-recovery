@@ -19,7 +19,7 @@ Welcome to an introduction to Active Data Guard on OCI. In this portion of the w
 ### Extra Resources
 - [Using Oracle Data Guard](https://docs.cloud.oracle.com/en-us/iaas/Content/Database/Tasks/usingdataguard.htm)
 
-## Step 1: Provisioning the Primary database
+## Part 1: Provisioning the Primary database
 
 Spin up a database using Oracle Cloud Infrastructure to serve as the "Primary" database
 
@@ -57,7 +57,7 @@ Click **Create DB System** and let it provision. (_This may take up to an hour o
 
 ![](./screenshots/300screenshots/1_9.png)
 
-## Step 2: Creating a Data Guard association
+## Part 2: Creating a Data Guard association
 
 Now that our database is provisioned and available, let's click on the database system name.
 
@@ -77,7 +77,7 @@ Enter the **Data Guard Association** details. Then click **Enable Data Guard**. 
 
 ![](./screenshots/300screenshots/2_5.png)
 
-## Step 3: Connecting to databases & testing Data Guard build
+## Part 3: Connecting to databases & testing Data Guard build
 
 After the standby database has provisioned, we will need the IP address of the instance to connect to.
 
@@ -142,7 +142,7 @@ SQL> select * from employees;
 
 ### Congratulations! You have successfully configured a Data Guard build.
 
-## Step 4: Performing a Data Guard Switchover 
+## Part 4: Performing a Data Guard Switchover 
 
 Data Guard switchovers are performed for events that are planned. The primary and standby databases reverse roles so that the needed measures can be performed on the respective database.
 
@@ -178,7 +178,7 @@ $ select name, database_role, open_mode from v$database;
 
 ### Switchover is now complete!
 
-## Step 5: Performing a Data Guard Failover
+## Part 5: Performing a Data Guard Failover
 
 Data Guard failovers are used for unforeseen disasters or downtime that is not planned. Data Guard will failover to the standby database from the primary in the event of any disaster or unplanned downtime. 
 

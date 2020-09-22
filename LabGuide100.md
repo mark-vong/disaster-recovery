@@ -64,65 +64,8 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
         ├── README.md
         ├── terraform.tfvars
         └── variables.tf
-    
-## Resource Manager
 
-The following section will show you how to configure resource manager to make the deployment easier. Anything that is 
-shaded out on the page. You will not be able to configure.
-
-### Configuration 
-
-1.  Navigate to the resource manager tab in oci. Next upload the zip file to the stack.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager.PNG)
-    
-2.  Input the configuration for the instances.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Compute.PNG)
-
-3.  Input the configuration for the vcn
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Network.PNG)
-    
-4.  Input the configuration for the load balancer
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB.PNG)
-    
-5.  Input the configuration for the keys. Since the keys are in the zip file and in the keys folder, make sure to put "./keys/" in front of the key names.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys-N.PNG)
-    
-    ### Review process
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review-N.PNG)
-    
-### Plan
-
-
-1.  Select plan from the dropdown menu.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-1.PNG)
-    
-2.  Make sure everything looks okay and then proceed
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-2.PNG)
-
-3.  Wait until the icon turns green.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-3.PNG)
-    
-### Apply
-    
-    
-1.  Select apply from the dropdown menu. 
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-1.PNG)
-    
-2.  Wait until the icon turns green.
-    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-2.PNG)
-
-
-### Destroy
- If you want to delete the infrastructure.
-    First navigate to OCI Console and terminate the DR database and once the termination is successful then resource manager can be used to destroy the environment.
-1.  Select destroy from the dropdown menu. 
-![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
-
-2.  Wait until the icon turns green.
-![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
-
-
-## Inputs
+### Inputs
 *The following inputs are required for terraform modules:*
 
 ```
@@ -154,7 +97,63 @@ lb_shape
 A template that determines the total pre-provisioned bandwidth (ingress plus egress). To get a list of available shapes, use the ListShapes operation. Example: 100Mbps
 ```
 
-## Example of the results terraform will produce.
+## Resource Manager
+
+The following section will show you how to configure resource manager to make the deployment easier. Anything that is 
+shaded out on the page. You will not be able to configure.
+
+### Configuration 
+
+1.  Navigate to the resource manager tab in oci. Next upload the zip file to the stack.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager.PNG)
+    
+2.  Input the configuration for the instances.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Compute.PNG)
+
+3.  Input the configuration for the vcn
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Network.PNG)
+    
+4.  Input the configuration for the load balancer
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-LB.PNG)
+    
+5.  Input the configuration for the keys. Since the keys are in the zip file and in the keys folder, make sure to put "./keys/" in front of the key names.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Keys-N.PNG)
+    
+    ### Review process
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review-N.PNG)
+    
+### Plan
+
+1.  Select plan from the dropdown menu.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-1.PNG)
+    
+2.  Make sure everything looks okay and then proceed
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-2.PNG)
+
+3.  Wait until the icon turns green.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-3.PNG)
+    
+### Apply
+    
+    
+1.  Select apply from the dropdown menu. 
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-1.PNG)
+    
+2.  Wait until the icon turns green.
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-2.PNG)
+
+
+### Destroy
+ If you want to delete the infrastructure.
+    First navigate to OCI Console and terminate the DR database and once the termination is successful then resource manager can be used to destroy the environment.
+1.  Select destroy from the dropdown menu. 
+![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
+
+2.  Wait until the icon turns green.
+![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
+
+
+### Example of the results terraform will produce.
  *Example: Instances in the Primary Region*
 
  ![](./screenshots/100screenshots/App-Server(Primary)-N.PNG)
