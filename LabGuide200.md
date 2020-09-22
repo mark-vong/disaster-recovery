@@ -32,7 +32,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## Part 1. Syncing files between two folders on the same local machine.
 
-### **Step 1:** Create two folders. Name one "primary_sync" and the other "DR_sync".
+### **Step 1:** Create two folders. Name one "primary\_sync" and the other "DR\_sync".
 
 ```
 <local_machine>$ mkdir primary_sync DR_sync
@@ -40,7 +40,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ls 
 ```
 
-### **Step 2:** Create a file in "primary_sync" and name it "primary.txt".
+### **Step 2:** Create a file in "primary\_sync" and name it "primary.txt".
 
 ```
 <local_machine>$ touch primary_sync/primary.txt
@@ -48,7 +48,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ls primary_sync 
 ```
 
-### **Step 3:** Verify that only "primary_sync" has a file in it and "DR_sync" is empty.
+### **Step 3:** Verify that only "primary\_sync" has a file in it and "DR\_sync" is empty.
 
 ```
 <local_machine>$ ls primary_sync/ DR_sync/
@@ -68,7 +68,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ls primary_sync/ DR_sync/
 ```
 
-### **Step 5:** Removing the "-n" flag will sync the file over to the "DR_sync" folder.
+### **Step 5:** Removing the "-n" flag will sync the file over to the "DR\_sync" folder.
 ```
 <local_machine>$ rsync -avP primary_sync/ DR_sync 
  
@@ -81,7 +81,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## Part 2. Syncing files between a local host and a remote server.
 
-### **Step 1:** Add the private key to your bastion server to your machine's key chain (authentication agent).
+### **Step 1:** Add the private key to your bastion server to your machine's SSH agent.
 ```
 <local_machine>$ ssh-add -k ~/<bastion_server_private_key>
 ```
@@ -93,21 +93,21 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 <local_machine>$ ssh -A -J opc@<bastion_public_ip> opc@<app_server_private_ip>
 ```
 
-### **Step 3:** Now let's begin syncing files from our local machine to the remote server. Leave the terminal window that's connected to the remote server open and open a new terminal window. In the terminal that's connected to your local machine, create an application file folder and name it "app_files".
+### **Step 3:** Now let's begin syncing files from our local machine to the remote server. Leave the terminal window that's connected to the remote server open and open a new terminal window. In the terminal that's connected to your local machine, create an application file folder and name it "app\_files".
 ```
 <local_machine>$ mkdir app_files
 
 <local_machine>$ ls
 ```
 
-### **Step 4:** Next, create an empty file in the application file folder and name it "app_file_1".
+### **Step 4:** Next, create an empty file in the application file folder and name it "app\_file\_1".
 ```
 <local_machine>$ touch app_files/app_file_1
 
 <local_machine>$ ls app_files
 ```
 
-### **Step 5:** Now navigate back to the terminal window connected to the remote server. Verify that "app_files/app_file_1" does not exist on the server.
+### **Step 5:** Now navigate back to the terminal window connected to the remote server. Verify that "app\_files/app\_file\_1" does not exist on the server.
 ```
 opc@<remote_server>$ ls 
 ```
@@ -172,7 +172,7 @@ opc@<app_server>$ chown opc:opc /var/www/html
 opc@<app_server>$ chown opc:opc /var/www/html/index.html
 ``` 
 
-### Step 3: Edit the index.html file in your primary application server your liking. You may add additional html tags or change the text to reflect the change.
+### Step 3: Edit the index.html file in your primary application server to your liking. You may add additional html tags or change the text to reflect the change.
 ```
 opc@<app_server_1>$ vi /var/www/html/index.html
 ```
