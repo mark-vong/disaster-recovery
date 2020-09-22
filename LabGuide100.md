@@ -159,7 +159,7 @@ A template that determines the total pre-provisioned bandwidth (ingress plus egr
 
  ![](./screenshots/100screenshots/App-Server(Primary)-N.PNG)
 
- *Example: Instance in the DR Region*
+ *Example: Instances in the DR Region*
 
  ![](./screenshots/100screenshots/App-Server(Secondary)-N.png)
  
