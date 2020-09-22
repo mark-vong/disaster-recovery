@@ -23,15 +23,15 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
         resource-manager-bin/
         ├── assets 
         │   ├── images
-        │   │   └── oracle.png
-        │   ├── scripts
-        │   │   ├── block-volume-migration.py
-        │   │   ├── boot-volume-migration.py
-        │   │   ├── cloud_init_checker.sh
-        │   │   └── README.md
-        │   └── templates
-        │       ├── bootstrap_dst.tpl
-        │       └── bootstrap_src.tpl
+        │   │   └── oracle.png
+        │   ├── scripts
+        │   │   ├── block-volume-migration.py
+        │   │   ├── boot-volume-migration.py
+        │   │   ├── cloud_init_checker.sh
+        │   │   └── README.md
+        │   └── templates
+        │       ├── bootstrap_dst.tpl
+        │       └── bootstrap_src.tpl
         ├── data_sources.tf
         ├── dr_schema.yaml
         ├── keys
@@ -39,26 +39,26 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
         │   ├── id_rsa.pub
         ├── main.tf
         ├── modules
-        │   ├── bastion_instance
-        │   │   ├── main.tf
-        │   │   ├── outputs.tf
-        │   │   └── variables.tf
-        │   ├── iam
-        │   │   ├── main.tf
-        │   │   ├── outputs.tf
-        │   │   └── variables.tf
-        │   ├── lb
-        │   │   ├── main.tf
-        │   │   ├── outputs.tf
-        │   │   └── variables.tf
-        │   ├── network
-        │   │   ├── main.tf
-        │   │   ├── outputs.tf
-        │   │   └── variables.tf
-        │   ├── server
-        │   │   ├── main.tf
-        │   │   ├── outputs.tf
-        │   │   └── variables.tf
+        │   ├── bastion_instance
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── iam
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── lb
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── network
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
+        │   ├── server
+        │   │   ├── main.tf
+        │   │   ├── outputs.tf
+        │   │   └── variables.tf
         ├── outputs.tf
         ├── providers.tf
         ├── README.md
