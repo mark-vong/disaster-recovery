@@ -215,7 +215,11 @@ Make sure to attach the previously created health check of your primary load bal
 9.![](./screenshots/100screenshots/traffic-management/attach-domain.png " ")
 Provide a subdomain name and attach the previously created DNS zone as an attached domain. 
 
-10.![](./screenshots/100screenshots/traffic-management/summary.png " ")
+10.![](./screenshots/100screenshots/traffic-management/summary-N.png " ")
+
+![](./screenshots/100screenshots/traffic-management/overview.png " ")
+
+![](./screenshots/100screenshots/traffic-management/domains.png " ")
 
 This is a summary of your traffic steering policy.
 
