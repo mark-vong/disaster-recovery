@@ -83,6 +83,8 @@ After the standby database has provisioned, we will need the IP address of the i
 
 ![](./screenshots/300screenshots/3_1.png)
 
+![](./screenshots/300screenshots/3_1_2.png)
+
 Scroll down and click **Nodes** to find the public IP address of the server. (_Note: do this for both the primary and standby databases_.)
 
 ![](./screenshots/300screenshots/3_2.png)
