@@ -211,12 +211,24 @@ Set the drain state to True. This will stop all current connections and simulate
 
 ![](./screenshots/200screenshots/policy-answer-data.png)
 
-Your health check on your primary region is now failing, and traffic hitting your DNS should now be routed to your DR region. 
+If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. 
 
-If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
+If you visit the IP address of this load balancer, you will get 502 bad gateway. 
+
+Before the drained state:
+
+![](./screenshots/200screenshots/prim-region-ip.png)
+
+![](./screenshots/200screenshots/dr-region-ip.png)
+
+After draining the backend set:
+
+![](./screenshots/200screenshots/prim-region-drained-ip.png)
+
 
 Now, enter your DNS url in your web browswer, you should see the HTML indicating you are now seeing traffic steered to your DR region. 
 
+![](./screenshots/200screenshots/dr-region-dns.png)
 
 
 ## Summary
