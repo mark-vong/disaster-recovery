@@ -43,11 +43,11 @@ The most common use of Storage Management Software is Oracle Grid Infrastructure
 
 ![](./screenshots/300screenshots/1_5.png)
 
-Specify the network information. Note the arrows, meaning action or change is required on your part. Fill in the required information and click **Next**.
+Specify the network information. You will use the DR VCN (**drvcn**) and the DB subnet (**db subnet**) created from the terraform script in the previous lab. Note the arrows, meaning action or change is required on your part. Fill in the required information and click **Next**.
 
 ![](./screenshots/300screenshots/1_6.png)
 
-Provide additional information for the initial database.
+Provide additional information for the initial database. **Provide a PDB name for the database.**
 
 ![](./screenshots/300screenshots/1_7.png)
 
@@ -91,7 +91,7 @@ Scroll down and click **Nodes** to find the public IP address of the server. (_N
 
 ![](./screenshots/300screenshots/3_3.png)
 
-Log into the servers using the IP address and SSH private key. Log in as the **opc** user on **both** servers.
+Log into the servers using the IP address and SSH private key. In order to access our DB servers, we'll need to hop through the **DR bastion** server. Please refer back to **Lab 200** for steps on how to server hop from a bastion. Log in as the **opc** user on **both** servers.
 
 Primary:
 
