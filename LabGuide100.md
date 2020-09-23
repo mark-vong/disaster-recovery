@@ -13,7 +13,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
 
 **Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
-## Quickstart Deployment
+## Quickstart Deployment Introduction.
 ### Prerequisites
 1.  Create your own private/public key pair on your local system.
 2.  Move the key pair to the resource-manager-bin/keys/ folder.
@@ -97,10 +97,9 @@ lb_shape
 A template that determines the total pre-provisioned bandwidth (ingress plus egress). To get a list of available shapes, use the ListShapes operation. Example: 100Mbps
 ```
 
-## Resource Manager
+## Deploying with OCI Resource Manager.
 
-The following section will show you how to configure resource manager to make the deployment easier. Anything that is 
-shaded out on the page. You will not be able to configure.
+The following section will show you how to configure resource manager to make the deployment easier. You will not be able to configure anything that is shaded out on the page.
 
 ### Configuration 
 
