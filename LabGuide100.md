@@ -13,7 +13,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
 
 **Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
-##  Part 1: Quickstart Deployment Introduction.
+##  **Part 1:** Quickstart Deployment Introduction.
 ### Prerequisites
 1.  Create your own private/public key pair on your local system.
 2.  Move the key pair to the resource-manager-bin/keys/ folder.
@@ -97,11 +97,11 @@ lb_shape
 A template that determines the total pre-provisioned bandwidth (ingress plus egress). To get a list of available shapes, use the ListShapes operation. Example: 100Mbps
 ```
 
-## Part 2. Deploying with OCI Resource Manager.
+## **Part 2.** Deploying with OCI Resource Manager.
 
 The following section will show you how to configure resource manager to make the deployment easier. You will not be able to configure anything that is shaded out on the page.
 
-### Step 1. Configuration 
+### **Step 1:** Configuration 
 
 1.  Navigate to the resource manager tab in oci. Next upload the zip file to the stack.
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager.PNG)
@@ -121,7 +121,7 @@ The following section will show you how to configure resource manager to make th
     ### Review process
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Review-N.PNG)
     
-### Step 2. Plan
+### **Step 2:** Plan
 
 1.  Select plan from the dropdown menu.
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-1.PNG)
@@ -132,7 +132,7 @@ The following section will show you how to configure resource manager to make th
 3.  Wait until the icon turns green.
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Plan-3.PNG)
     
-### Step 3. Apply
+### **Step 3:** Apply
     
     
 1.  Select apply from the dropdown menu. 
@@ -161,9 +161,9 @@ The following section will show you how to configure resource manager to make th
 
  ![](./screenshots/100screenshots/App-Server(Secondary)-N.png)
  
-## Part 3. Configuring the DNS for failover.
+## **Part 3.** Configuring the DNS for failover.
 
-### Step 1. Create a Health Check
+### **Step 1:** Create a Health Check
 1.  Navigate to the upper left hamburger menu, expand **Networking** and click on **Health Checks**.
     ![](./screenshots/100screenshots/health-check/health-check-console.png)
 
@@ -175,7 +175,7 @@ The following section will show you how to configure resource manager to make th
 
     ![](./screenshots/100screenshots/health-check/health-check-tag.png)
 
-### Step 2. Create a new DNS zone
+### **Step 2:** Create a new DNS zone
 1. Navigate to the upper left hamburger menu, expand **Networking** and click on **DNS Zone Management**.
     ![](./screenshots/100screenshots/dns-zone/dns-zone-console.png)
 
@@ -186,7 +186,7 @@ The following section will show you how to configure resource manager to make th
     ![](./screenshots/100screenshots/dns-zone/dns-zone-info.png)
 
 
-### Step 3. Create a Traffic Management Steering Policy
+### **Step 3:** Create a Traffic Management Steering Policy
 1.  From the OCI console, under networking go to the traffic steering policies.
     ![](./screenshots/100screenshots/traffic-management/2.png " ")
 
