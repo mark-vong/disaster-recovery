@@ -182,7 +182,7 @@ The following section will show you how to configure resource manager to make th
 2. Click on **Create Zone**.
     ![](./screenshots/100screenshots/dns-zone/dns-zone-create.png)
 
-3. Provide a **Zone Name**. This value has to be the same as an internet accessible domain hosted on either godaddy or freenom. The **Zone Type** should be **Primary**. Once created, please connect your DNS with the provided nameservers provided through the service console.
+3. Provide a **Zone Name**. This value has to be the same as an internet accessible domain hosted on either godaddy or freenom. The **Zone Type** should be **Primary**. Once created, please connect your DNS with the nameservers provided through the service console.
     ![](./screenshots/100screenshots/dns-zone/dns-zone-info.png)
 
 
