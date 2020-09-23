@@ -147,10 +147,10 @@ shaded out on the page. You will not be able to configure.
  If you want to delete the infrastructure.
     First navigate to OCI Console and terminate the DR database and once the termination is successful then resource manager can be used to destroy the environment.
 1.  Select destroy from the dropdown menu. 
-![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy.PNG)
 
 2.  Wait until the icon turns green.
-![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
+    ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
 
 
 ### Example of the results terraform will produce.
@@ -165,63 +165,72 @@ shaded out on the page. You will not be able to configure.
 ## Configuring the DNS for failover.
 
 ### Create a Health Check
-1.![](./screenshots/100screenshots/health-check/health-check-console.png)
+1.  Navigate to the upper left hamburger menu, expand **Networking** and click on **Health Checks**.
+    ![](./screenshots/100screenshots/health-check/health-check-console.png)
 
-2.![](./screenshots/100screenshots/health-check/health-check-name.png)
+2.  Click on **Create Health Check** and provide the appropriate information. _Make sure to attach the **Primary** load balancer as a target_. You may choose whichever [vantage points](https://docs.cloud.oracle.com/en-us/iaas/Content/HealthChecks/Concepts/healthchecks.htm) you would like. The **Request Type** and **Protocol** should both be **HTTP**. The **Method** should be **HEAD**. Leave everything else as their default values.
 
-3.![](./screenshots/100screenshots/health-check/health-check-port.png)
+    ![](./screenshots/100screenshots/health-check/health-check-name.png)
 
-4.![](./screenshots/100screenshots/health-check/health-check-tag.png)
+    ![](./screenshots/100screenshots/health-check/health-check-port.png)
+
+    ![](./screenshots/100screenshots/health-check/health-check-tag.png)
 
 ### Create a new DNS zone
-1.![](./screenshots/100screenshots/dns-zone/dns-zone-console.png)
+1. Navigate to the upper left hamburger menu, expand **Networking** and click on **DNS Zone Management**.
+    ![](./screenshots/100screenshots/dns-zone/dns-zone-console.png)
 
-2.![](./screenshots/100screenshots/dns-zone/dns-zone-create.png)
+2. Click on **Create Zone**.
+    ![](./screenshots/100screenshots/dns-zone/dns-zone-create.png)
 
-3.![](./screenshots/100screenshots/dns-zone/dns-zone-info.png)
+3. Provide a **Zone Name**. This value has to be the same as an internet accessible domain hosted on either godaddy or freenom. The **Zone Type** should be **Primary**. Once created, please connect your DNS with the provided nameservers provided through the service console.
+    ![](./screenshots/100screenshots/dns-zone/dns-zone-info.png)
 
 
 ### Create a Traffic Management Steering Policy
-1.![](./screenshots/100screenshots/traffic-management/2.png " ")
+1.  From the OCI console, under networking go to the traffic steering policies.
+    ![](./screenshots/100screenshots/traffic-management/2.png " ")
 
-From the OCI console, under networking go to the traffic steering policies.
 
-2.![](./screenshots/100screenshots/traffic-management/3.png " ")
+2.  Create a failover traffic steering policy.
+    ![](./screenshots/100screenshots/traffic-management/3.png " ")
 
-Create a failover traffic steering policy.
 
-3.![](./screenshots/100screenshots/traffic-management/policy-name.png " ")
+3.  This policy will point your DNS to your DR region's load balancer if your primary region's load balancer fails the health check. 
+    ![](./screenshots/100screenshots/traffic-management/policy-name.png " ")
 
-This policy will point your DNS to your DR region's load balancer if your primary region's load balancer fails the health check. 
 
-4.![](./screenshots/100screenshots/traffic-management/primary-lb.png " ")
+4.  You can get your load balancer IPs from Networking -> Load balancers. Make sure you are in the correct regions. 
+    ![](./screenshots/100screenshots/traffic-management/primary-lb.png " ")
 
-You can get your load balancer IPs from Networking -> Load balancers. Make sure you are in the correct regions. 
 
-5.![](./screenshots/100screenshots/traffic-management/dr-lb.png " ")
+5.  You can see, we switch regions on the upper right to get the IP of the LB in the DR region, Phoenix.
+    ![](./screenshots/100screenshots/traffic-management/dr-lb.png " ")
 
-You can see, we switch regions on the upper right to get the IP of the LB in the DR region, Phoenix.
 
-6.![](./screenshots/100screenshots/traffic-management/answer-pool-1.png " ")
+6.  Provide your answer pools for both of your regions.
+    ![](./screenshots/100screenshots/traffic-management/answer-pool-1.png " ")
 
-7.![](./screenshots/100screenshots/traffic-management/answer-pool-2.png " ")
-Input the information like above. 
+    ![](./screenshots/100screenshots/traffic-management/answer-pool-2.png " ")
 
-8.![](./screenshots/100screenshots/traffic-management/pool-priority.png " ")
-![](./screenshots/100screenshots/traffic-management/attach-health-check.png " ")
-Make sure to attach the previously created health check of your primary load balancer, this is what determines if traffic should be re-directed to your DR region. 
 
-9.![](./screenshots/100screenshots/traffic-management/attach-domain.png " ")
-Provide a subdomain name and attach the previously created DNS zone as an attached domain. 
+7.  Make sure to attach the previously created health check of your primary load balancer, this is what determines if traffic should be re-directed to your DR region.  
+    ![](./screenshots/100screenshots/traffic-management/pool-priority.png " ")
 
-10.![](./screenshots/100screenshots/traffic-management/summary-N.png " ")
+    ![](./screenshots/100screenshots/traffic-management/attach-health-check.png " ")
 
-![](./screenshots/100screenshots/traffic-management/overview.png " ")
 
-![](./screenshots/100screenshots/traffic-management/domains.png " ")
+8.  Provide a subdomain name and attach the previously created DNS zone as an attached domain. 
+    ![](./screenshots/100screenshots/traffic-management/attach-domain.png " ")
 
-This is a summary of your traffic steering policy.
 
+9.  This is a summary of your traffic steering policy.
+
+    ![](./screenshots/100screenshots/traffic-management/summary-N.png " ")
+
+    ![](./screenshots/100screenshots/traffic-management/overview.png " ")
+
+    ![](./screenshots/100screenshots/traffic-management/domains.png " ")
 
 
 <!-- ### Attach a subdomain to the DNS zone
