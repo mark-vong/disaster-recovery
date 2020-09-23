@@ -8,7 +8,7 @@
 
 Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its **delta-transfer algorithm** that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. **Rsync** is used extensively in **backups**, **disaster recovery**, and **mirroring** scenarios. 
 
-### **This lab will leverage the existing infrastructure that was created in the previous lab.** 
+**This lab will leverage the existing infrastructure that was created in the previous lab.** 
 
 ### **Objectives**
 - Understand the syntax of **rsync**.

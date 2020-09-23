@@ -5,11 +5,11 @@
 [Introduction](#introduction)
 -->
 
-## Introduction
+## **Introduction**
 
 In this workshop, we'll take an in-depth look into the disaster recovery (DR) solutions that are leveraged by Oracle's customers. These solutions will cover the discussion around disaster recovery at both the application and database levels.
 
-### Objectives
+### **Objectives**
 - Leverage Rsync to sync application files between the primary and DR servers
 - Set up DR failover using Oracle Data Guard through the OCI console as well as through manual configurations.
 - Simulate DR for solution verification.
