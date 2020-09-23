@@ -14,7 +14,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
 **Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
 ##  **Part 1.** Quickstart Deployment Introduction.
-### Prerequisites
+### **Prerequisites**
 1.  Create your own private/public key pair on your local system.
 2.  Move the key pair to the resource-manager-bin/keys/ folder.
 3.  Zip up all of the files from resource-manager-bin folder. The zip file name is not important.
@@ -65,7 +65,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
         ├── terraform.tfvars
         └── variables.tf
 
-### Inputs
+### **Inputs**
 *The following inputs are required for terraform modules:*
 
 ```
@@ -255,4 +255,4 @@ You can place these HTML files in your app-tier compute nodes to demonstrate the
 ## Troubleshooting -->
 
 
-### End
+### **End**
