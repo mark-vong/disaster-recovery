@@ -193,53 +193,48 @@ opc@<app_server_2>$ cat /var/www/html/index.html
 
 ### Step 6: Simulate DR scenario.
 
-![](./screenshots/200screenshots/lb-info.png)
+1.  Navigate from the upper left hamburger menu to **Networking** and click on **Load balancers**. Find the Load Balancer in your primary region.
+    ![](./screenshots/200screenshots/lb-info.png)
 
-Navigate from the upper left hamburger menu to networking -> Load balancers. Find the Load Balancer in your primary region.
+2.  Go to your backend set. 
+    ![](./screenshots/200screenshots/lb-backend-set.png)
 
-![](./screenshots/200screenshots/lb-backend-set.png)
+3.  Check mark your backends. Then click **actions**.
+    ![](./screenshots/200screenshots/lb-backend-set-actions.png)
 
-Go to your backend set. 
+4.  Set the **drain state** to **True**. This will stop all current connections and simulate the disaster. 
+    ![](./screenshots/200screenshots/lb-backend-set-drain.png)
 
-![](./screenshots/200screenshots/lb-backend-set-actions.png)
+5.  If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. 
+    ![](./screenshots/200screenshots/policy-answer-data.png)
 
-Check mark your backends. Then press actions.
+#### If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
-![](./screenshots/200screenshots/lb-backend-set-drain.png)
+#### Before the drained state:
 
-Set the drain state to True. This will stop all current connections and simulate the disaster. 
+1.  **Primary Region:**
+    ![](./screenshots/200screenshots/prim-region-ip.png)
 
-![](./screenshots/200screenshots/policy-answer-data.png)
+2.  **DR Region:**
+    ![](./screenshots/200screenshots/dr-region-ip.png)
 
-If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. 
-
-If you visit the IP address of this load balancer, you will get 502 bad gateway. 
-
-**Before the drained state:**
-
-**Primary Region:**
-![](./screenshots/200screenshots/prim-region-ip.png)
-
-**DR Region:**
-![](./screenshots/200screenshots/dr-region-ip.png)
-
-**DNS:**
-![](./screenshots/200screenshots/prim-region-dns.png)
+3.  **DNS:**
+    ![](./screenshots/200screenshots/prim-region-dns.png)
 
 
-**After draining the backend set:**
+#### After draining the backend set:
 
-**Primary Region:**
-![](./screenshots/200screenshots/prim-region-drained-ip.png)
+1.  **Primary Region:**
+    ![](./screenshots/200screenshots/prim-region-drained-ip.png)
 
-**DR Region:**
-![](./screenshots/200screenshots/dr-region-ip.png)
+2.  **DR Region:**
+    ![](./screenshots/200screenshots/dr-region-ip.png)
 
-**DNS:**
-![](./screenshots/200screenshots/dr-region-dns.png)
+3.  **DNS:**
+    ![](./screenshots/200screenshots/dr-region-dns.png)
 
 
-## Summary
+### Summary
 
 -   In this lab, you learned how to use rsync to sync files on a local machine, how to sync from a local machine to a remote server and how to recover from a DR scenario.
 
