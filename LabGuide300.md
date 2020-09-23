@@ -7,16 +7,16 @@
 [Step 3: Connecting to databases & testing Data Guard build](#step-3-connecting-to-databases--testing-data-guard-build) -->
 # OCI Active Data Guard
 
-## Introduction
+## **Introduction**
 
 Welcome to an introduction to Active Data Guard on OCI. In this portion of the workshop, we'll dive into how to leverage this tool for DR failover. Throughout the lab, we'll demonstrate the ease of use that is available to the end user via the Oracle Cloud console. 
 
-### Objectives
+### **Objectives**
 - Understand the value of Oracle Active Data Guard.
 - Configure Active Data Guard on virtual machine databases.
 - Simulate a DR failover scenario using Active Data Guard.
 
-### Extra Resources
+### **Extra Resources**
 - [Using Oracle Data Guard](https://docs.cloud.oracle.com/en-us/iaas/Content/Database/Tasks/usingdataguard.htm)
 
 ## **Part 1.** Provisioning the Primary database.

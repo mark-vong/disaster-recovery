@@ -1,19 +1,21 @@
 # Disaster Recovery Network and Connectivity Setup
 
-## Introduction
+## **Introduction**
 
 This solution provides a Network Architecture deployment to demonstrate a Disaster Recovery scenario across regions.
 
-### Objectives
+### **Objectives**
 - Deploy DR network and infrastructure on OCI using Terraform.
 - Configure network and infrastructure settings through the Oracle Cloud console.
 
-### Extra Resources
+### **Extra Resources**
 - [Introduction to OCI](https://docs.cloud.oracle.com/en-us/iaas/Content/GSG/Concepts/baremetalintro.htm)
 
 **Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
+
 ##  **Part 1.** Quickstart Deployment Introduction.
+
 ### **Prerequisites**
 1.  Create your own private/public key pair on your local system.
 2.  Move the key pair to the resource-manager-bin/keys/ folder.

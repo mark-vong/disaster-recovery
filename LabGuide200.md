@@ -4,33 +4,25 @@
 [Introduction](#introduction)
 -->
 
-## Introduction
+## **Introduction**
 
 Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its **delta-transfer algorithm** that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. **Rsync** is used extensively in **backups**, **disaster recovery**, and **mirroring** scenarios. 
 
-**For this lab specifically, we will be working in the terminal and in the OCI console. As a result, we've included the commands to run as we walk you through the lab steps.** 
+### **This lab will leverage the existing infrastructure that was created in the previous lab.** 
 
-**In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync.** 
-
-**In the second part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.**
-
-**In the third and optional part of the lab, we'll go through the steps of automating rsync by setting it up as a cron job.**
-
-**In the fourth and final part of the lab, we'll go through the steps of simulating a DR scenario.**
-
-**This lab will leverage the existing infrastructure that was created in the previous lab.** 
-
-### Objectives
+### **Objectives**
 - Understand the syntax of **rsync**.
 - Sync files locally.
 - Sync files between a local host and a remote server.
 - Simulate DR scenario for application tier.
 
-### Extra Resources
+### **Extra Resources**
 -   To learn more about rsync, please refer to the following Linux documentation: [rsync](https://linux.die.net/man/1/rsync)
 -   To learn more about specific rsync use cases, please refer to the following tutorial: [rsync usage](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps).
 
 ## **Part 1.** Syncing files between two folders on the same local machine.
+
+### **In the first part of this lab, we will sync files locally on our machines to get an introductory grasp of rsync.** 
 
 ### **Step 1:** Create two folders. Name one "primary\_sync" and the other "DR\_sync".
 
@@ -81,6 +73,8 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 ## **Part 2.** Syncing files between a local host and a remote server.
 
+### **In the second part of the lab, we will simulate how an administrator would sync files between a local machine and a remote server.**
+
 ### **Step 1:** Add the private key to your bastion server to your machine's SSH agent.
 ```
 <local_machine>$ ssh-add -k ~/<bastion_server_private_key>
@@ -128,7 +122,8 @@ opc@<remote_server>$ ls
 
 
 ## **(Optional) Part 3.** Setting up periodic and automated syncs using Cron.
-### Cron is a Linux tool that enables periodic repetition of commands.  
+
+### **In the third and optional part of the lab, we'll go through the steps of automating rsync by setting it up as a cron job. Cron is a Linux tool that enables periodic repetition of commands.**
 
 ### **Step 1:** Run the following command to open a text editor. This editor will contain all of the **rules** for command repetitions. 
 ```
@@ -157,6 +152,8 @@ command: command to execute
 ### Great, the sync will now automate for the proposed period of time!
 
 ## **Part 4.** Simulating DR with Rsync.
+
+### **In the fourth and final part of the lab, we'll go through the steps of simulating a DR scenario.**
 
 ### **Step 1:** SSH into both of your regional application servers using the SSH agent.
 ```
