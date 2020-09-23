@@ -13,7 +13,7 @@ This solution provides a Network Architecture deployment to demonstrate a Disast
 
 **Note:** This is **not** configured for a production environment. **This is just for demo purposes.**
 
-##  **Part 1:** Quickstart Deployment Introduction.
+##  **Part 1.** Quickstart Deployment Introduction.
 ### Prerequisites
 1.  Create your own private/public key pair on your local system.
 2.  Move the key pair to the resource-manager-bin/keys/ folder.
@@ -142,7 +142,7 @@ The following section will show you how to configure resource manager to make th
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Apply-2.PNG)
 
 
-### Destroy
+### **Destroy**
  If you want to delete the infrastructure.
     First navigate to OCI Console and terminate the DR database and once the termination is successful then resource manager can be used to destroy the environment.
 1.  Select destroy from the dropdown menu. 
@@ -152,7 +152,7 @@ The following section will show you how to configure resource manager to make th
     ![](./screenshots/100screenshots/resource-manager-files/ResourceManager-Destroy-2.PNG)
 
 
-### Example of the results terraform will produce.
+### **Example of the results terraform will produce.**
  *Example: Instances in the Primary Region*
 
  ![](./screenshots/100screenshots/App-Server(Primary)-N.PNG)

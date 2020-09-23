@@ -30,7 +30,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 -   To learn more about rsync, please refer to the following Linux documentation: [rsync](https://linux.die.net/man/1/rsync)
 -   To learn more about specific rsync use cases, please refer to the following tutorial: [rsync usage](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps).
 
-## Part 1. Syncing files between two folders on the same local machine.
+## **Part 1.** Syncing files between two folders on the same local machine.
 
 ### **Step 1:** Create two folders. Name one "primary\_sync" and the other "DR\_sync".
 
@@ -79,7 +79,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 
 
 
-## Part 2. Syncing files between a local host and a remote server.
+## **Part 2.** Syncing files between a local host and a remote server.
 
 ### **Step 1:** Add the private key to your bastion server to your machine's SSH agent.
 ```
@@ -127,7 +127,7 @@ opc@<remote_server>$ ls
 
 
 
-## (Optional) Part 3. Setting up periodic and automated syncs using Cron.
+## **(Optional) Part 3.** Setting up periodic and automated syncs using Cron.
 ### Cron is a Linux tool that enables periodic repetition of commands.  
 
 ### **Step 1:** Run the following command to open a text editor. This editor will contain all of the **rules** for command repetitions. 
@@ -156,7 +156,7 @@ command: command to execute
 ```
 ### Great, the sync will now automate for the proposed period of time!
 
-## Part 4: Simulating DR with Rsync.
+## **Part 4.** Simulating DR with Rsync.
 
 ### Step 1: SSH into both of your regional application servers using the SSH agent.
 ```
