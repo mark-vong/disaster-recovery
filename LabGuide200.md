@@ -50,7 +50,7 @@ Welcome to an introduction of **rsync**. **Rsync** is a file copying tool that e
 #### "-a" represents "archive". It allows us to sync all files in the source directory recursively while preserving any symbolic links, special and device files, modification times, group, owner, and permission.
 #### "-v" represents "verbose". This flag lets us know what's happening when the command is run.
 #### "-P" represents the combination of the "progress" and "partial" flags which allow us to see the transfer progress bar as well as the resumption of interrupted transfers.
-#### "-n" represented "dry-run". This flag shows what content would have been transferred, useful to test out connectivity to the target host as well as target folder access. 
+#### "-n" represents "dry-run". This flag shows what content would have been transferred, useful to test out connectivity to the target host as well as target folder access. 
 
 ### **Step 4:** Great, now let's execute our first sync between the two folders. Let's include the "-n" flag first to make sure everything is in place before we actually sync the file.
 
