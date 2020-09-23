@@ -205,10 +205,8 @@ opc@<app_server_2>$ cat /var/www/html/index.html
 4.  Set the **drain state** to **True**. This will stop all current connections and simulate the disaster. 
     ![](./screenshots/200screenshots/lb-backend-set-drain.png)
 
-5.  If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. 
+5.  If you navigate to health/check traffic steering - you can see the health for the Primary region load balancer is now critical. If you visit the IP address of this load balancer, you will get 502 bad gateway. 
     ![](./screenshots/200screenshots/policy-answer-data.png)
-
-#### If you visit the IP address of this load balancer, you will get 502 bad gateway. 
 
 #### Before the drained state:
 
