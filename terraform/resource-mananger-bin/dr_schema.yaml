@@ -1,0 +1,85 @@
+# Title shown in Application Information tab.
+title: Sample input variable schema
+# Sub Title shown in Application Information tab.
+description: Sample description...
+schemaVersion: 1.1.0
+version: "20190304"
+
+
+variableGroups:
+  - title: "Hidden variables"
+    variables:
+      - compartment_ocid
+      - tenancy_ocid
+      - db_system_shape
+      - defined_tags
+      - freeform_tags
+      - export_read_only_access_source
+      - src_user_data
+      - dst_user_data
+
+    visible: false
+
+  - title: "Compute Configuration"
+    variables:
+      - appserver_1_display_name
+      - appserver_2_display_name
+      - bastion_server_shape
+      - app_server_shape
+
+  - title: "Network Configuration"
+    variables:
+      - vcn_dns_label
+      - vcn_cidr_block
+      - dr_vcn_cidr_block
+      - region
+      - dr_region
+
+  - title: "Load Balancer Configuration"
+    variables:
+      - lb_display_name
+      - lb_shape
+      - is_private_lb
+
+#  - title: "Database Configuration"
+#    variables:
+#      - db_display_name
+#      - db_admin_password
+
+#  - title: "Object Storage Configuration"
+#    variables:
+#      - bucket_display_name
+
+#  - title: "Shared FSS Configuration"
+#    variables:
+#      - dst_fssserver_display_name
+#      - src_mount_path
+#      - dst_mount_path
+#      - cron_schedule
+#      - dr_cron_schedule
+#      - data_sync_frequency
+#      - snapshot_frequency
+
+
+  - title: "Keys"
+    variables:
+      - ssh_public_key_file
+      - ssh_private_key_file
+
+variables:
+  lb_shape:
+    type: enum
+    enum:
+      - "100Mbps"
+      - "400Mbps"
+  region:
+    type: oci:identity:region:name
+    title: Primary Region
+    description: The primary region in which to create all resources
+    required: true
+
+  dr_region:
+    type: oci:identity:region:name
+    title: Standby Region
+    description: The standby region in which to create all resources
+    required: true
