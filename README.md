@@ -14,6 +14,9 @@ In this workshop, we'll take an in-depth look into the disaster recovery (DR) so
 - Set up DR failover using Oracle Data Guard through the OCI console as well as through manual configurations.
 - Simulate DR for solution verification.
 
+## Part 1. Download the Terraform zip file
+
+### Download the [Terraform files](./Active_Passive_DR.zip)  onto your local machine and move onto Lab 100.
 <!-- 
 ## Table of Contents
 
