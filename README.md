@@ -16,7 +16,7 @@ In this workshop, we'll take an in-depth look into the disaster recovery (DR) so
 
 ## Part 1. Download the Terraform zip file
 
-### Download the [Terraform files](./Active_Passive_DR.zip)  onto your local machine and move onto Lab 100.
+### Download the [Terraform files](terraform/Active_Passive_DR.zip) onto your local machine and move onto Lab 100.
 <!-- 
 ## Table of Contents
 
