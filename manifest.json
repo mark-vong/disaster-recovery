@@ -8,17 +8,17 @@
         {            
             "title": "Lab 100: Disaster Recovery Network and Connectivity Setup",
             "publisheddate": "09/03/2020",
-            "filename": "LabGuide100.md"
+            "filename": "./labs/LabGuide100.md"
         },
         {            
             "title": "Lab 200: Using Rsync for Application File Sync",
             "publisheddate": "09/03/2020",
-            "filename": "LabGuide200.md"
+            "filename": "./labs/LabGuide200.md"
         },
         {            
             "title": "Lab 300: OCI Active Data Guard",
             "publisheddate": "09/03/2020",
-            "filename": "LabGuide300.md"
+            "filename": "./labs/LabGuide300.md"
         }
      ]
 }
