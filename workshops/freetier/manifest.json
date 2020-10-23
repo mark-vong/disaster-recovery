@@ -1,0 +1,20 @@
+{
+    "tutorials": [
+        {            
+            "title": "Introduction",
+            "filename": "../../introduction/introduction.md"
+        },
+        {            
+            "title": "Lab 1: Disaster Recovery Network and Connectivity Setup",
+            "filename": "../../setup/setup.md"
+        },
+        {            
+            "title": "Lab 2: Using Rsync for Application File Sync",
+            "filename": "../../rsync/rsync.md"
+        },
+        {            
+            "title": "Lab 3: Oracle Data Guard",
+            "filename": "../../dataguard/dataguard.md"
+        }
+     ]
+}
