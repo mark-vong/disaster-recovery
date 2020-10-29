@@ -4,7 +4,7 @@
 
 This lab walks you through setting up your environment for our active and passive disaster recovery scenarios. It will leverage Oracle Cloud's resource manager as well as pre-prepared terraform scripts.
 
-## About OCI Resource Manager
+### About OCI Resource Manager
 
 OCI resource manager enables us to quickly run completed terraform scripts in order to deploy infrastructure in Oracle Cloud. It provides a friendly and customizable user interface that facilitates the deployment process.
 

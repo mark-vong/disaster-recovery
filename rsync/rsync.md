@@ -6,7 +6,7 @@ In this lab, we will leverage the existing infrastructure created in the previou
 
 Estimated Lab Time: 90 minutes
 
-## About Rsync
+### About Rsync
 
 **Rsync** is a file copying tool that exists on most linux environments. It is capable of copying files locally and to/from another host over a remote shell. Its differentiating feat is its **delta-transfer algorithm** that focuses on syncing the changes observed in files. This optimizes the sync by reducing the amount of data sent over the network. **Rsync** is used extensively in **backups**, **disaster recovery**, and **mirroring** scenarios. 
 
